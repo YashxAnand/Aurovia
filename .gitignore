@@ -1,1 +1,4 @@
 *.mp4
+.wrangler/
+worker/.wrangler/
+node_modules/

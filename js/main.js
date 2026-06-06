@@ -42,14 +42,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 2. Mobile Menu Toggle
     const mobileBtn = document.querySelector('.mobile-menu-btn');
-    const navLinks = document.querySelector('.nav-links');
+    const navLinks = document.querySelectorAll('.nav-links');
 
     if (mobileBtn) {
         mobileBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
+            navLinks.forEach(nav => nav.classList.toggle('active'));
             // Animate hamburger icon (optional enhancement)
             const spans = mobileBtn.querySelectorAll('span');
-            if (navLinks.classList.contains('active')) {
+            if (navLinks[0].classList.contains('active')) {
                 spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
                 spans[1].style.opacity = '0';
                 spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
