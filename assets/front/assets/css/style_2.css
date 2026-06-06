@@ -1,0 +1,745 @@
+ @import url('https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@300;400;500;600;700&display=swap');
+
+ /*font-family: "Cormorant SC", serif;*/
+@import url('https://fonts.googleapis.com/css2?family=Prata&display=swap');
+/*font-family: "Prata", serif;*/
+
+
+ 
+.bannerTitleVideo span.fl-heading-text > span {
+    display: block;
+}
+/* .promise-box .fl-heading{
+    border-color:#fff!important;
+} */
+.justifyContentPara .fl-rich-text p {
+    text-align: justify !important;
+}
+/*.bannerTitleVideo span.fl-heading-text > span:first-child {
+    position: relative;
+    text-indent: 8%;
+}*/
+
+/*.bannerTitleVideo span.fl-heading-text > span:last-child {
+    text-indent: 14%;
+}*/
+.fl-form-field input {
+    text-transform: none!important;
+}
+.fl-form-success-message > p a {
+    display: block;
+    text-transform: capitalize;
+    padding: 8px;
+    border: 1px solid #000;
+    line-height: 1;
+    font-size: 15px;
+    text-align: center;
+    color: #000;
+    margin-top: 10px;
+    font-family: 'Prata';
+}
+/*.bannerTitleVideo span.fl-heading-text > span:first-child:before {
+    position: absolute;
+    content: '';
+    width: 7%;
+    height: 2px;
+    background-color: #fff;
+    top: 30px;
+    left: 0;
+}*/
+
+.bannerTitleVideo h2.fl-heading {
+    /*    max-width: 970px;*/
+    margin: 0 auto;
+    display: block;
+}
+body.home .headerStyleSection {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 99;
+    background-color: transparent;
+}
+.mainRowTab {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.colFirstTab {
+    width: calc(40% - 12px);
+}
+.colFirstTab img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.colLastTab {
+    width: calc(60% - 12px);
+    padding-left: 6%;
+    padding-right: 4%;
+    align-self: flex-end;
+}
+.tabsBottomStyleMain .pp-tabs {
+    display: flex;
+    flex-wrap: wrap;
+}
+.tabsBottomStyleMain .pp-tabs .pp-tabs-labels {
+    width: 100%;
+    order: 2;
+    border-bottom: 1px solid #000;
+    padding: 0 3%;
+}
+.tabsBottomStyleMain .pp-tabs .pp-tabs-panels {
+    width: 100%;
+    order: 1;
+}
+.tabsBottomStyleMain .pp-tabs-label .pp-tab-label-flex {
+    justify-content: center;
+}
+.tabsBottomStyleMain .pp-tabs-style-3 .pp-tabs-label:after {
+    width: 100%;
+    height: 100%;
+    background-color: transparent !important;
+    border: 1px solid #000;
+    border-bottom: 0;
+}
+.tabsBottomStyleMain .pp-tabs-horizontal .pp-tabs-labels .pp-tabs-label {
+    padding: 5px 10px 5px;
+}
+.tabsBottomStyleMain .pp-tabs .pp-tabs-label.pp-tab-active, .tabsBottomStyleMain .pp-tabs .pp-tabs-label.pp-tab-active:hover, .tabsBottomStyleMain .pp-tabs .pp-tabs-label:hover, .tabsBottomStyleMain .pp-tabs .pp-tabs-label:focus {
+    background-color: rgba(247, 247, 247, 0);
+    color: #000000;
+}
+form .gform_body .gfield_label {
+    font-family: "Cormorant SC", serif !important;
+    font-weight: 600 !important;
+    font-size: 18px !important;
+}
+.entry-content .fourBoxSection h4.fl-heading a {
+    font-family: "Cormorant SC", serif;
+    font-size: 22px;
+    font-weight: 600;
+}
+.colLastTab h3 {
+    font-size: 42px;
+    font-family: "Cormorant SC", serif;
+    color: #000;
+    font-weight: 500;
+    text-transform: uppercase;
+    line-height: 1;
+}
+.colLastTab h5 {
+    font-size: 20px;
+    font-style: italic;
+    font-family: "Cormorant SC", serif;
+    color: #252525;
+    line-height: 1.3;
+    text-transform: capitalize;
+    margin-bottom: 10px;
+}
+.colLastTab p {
+    font-size: 14px;
+    line-height: 1.7;
+    letter-spacing: 0.5px;
+    color: #202020;
+    text-align: justify;
+    margin-bottom: 10px;
+}
+.blog-box h5.uabb-post-meta.uabb-blog-post-section {
+    display: none;
+}
+.signature-text .fl-rich-text h4 {
+    text-transform: uppercase!important;
+    font-size: 18px;
+    margin: 0;
+}
+.signature-text .fl-rich-text h3 {
+    font-size: 52px;
+    margin-bottom: 0;
+}
+.signature-text .fl-rich-tex p {
+    font-size: 20px;
+}
+.signature-text .fl-rich-text p {
+    font-size: 20px;
+}
+.signature-text .fl-rich-text p a {
+    text-transform: uppercase!important;
+    font-size: 18px;
+    margin-top: 20px;
+    display: inline-block;
+    text-decoration: underline;
+}
+.mainFooterRowCstm {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /*    max-width: 210px;*/
+    align-items: center;
+}
+.socialLinkFtr {
+    display: flex;
+    flex-wrap: wrap;
+    width: 25px;
+    gap: 15px;
+}
+.socialLinkFtr svg {
+    width: 20px;
+    height: 20px;
+}
+.navgationLinkFtr {
+    width: calc(100% - 26px);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    text-transform: uppercase;
+    font-family: 'Prata', sans-serif;
+    font-size: 14px;
+}
+body.home .imageLogoHeader .uabb-image-content img {
+    filter: invert(1);
+}
+.bannerwithoutheader > .fl-row-content-wrap {
+    min-height: calc(100vh - 100px) !important;
+}
+.navgationLinkFtr > a {
+    display: block;
+    width: 100%;
+    text-align: right;
+    color: #000;
+    font-family: "Cormorant SC", serif;
+    font-weight: 600;
+    font-size: 15px;
+}
+.socialLinkFtr a {
+    display: inline-block;
+    line-height: 1;
+}
+.footerColumnNav h2 {
+    /*    max-width: 250px;*/
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 50px;
+    letter-spacing: 1px;
+    color: #000;
+    font-family: "Cormorant SC", serif;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+.newsLetterFtr .fl-rich-text h2 {
+    text-transform: uppercase;
+    font-size: 50px;
+    letter-spacing: 1px;
+    color: #000;
+    font-family: "Cormorant SC", serif;
+    margin-bottom: 15px;
+    font-weight: 500!important;
+}
+.newsLetterFtr .fl-rich-text p {
+    font-family: 'Prata';
+    letter-spacing: 3px;
+    line-height: 1.9 !important;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 500 !important;
+    color: #000;
+}
+.logoImageFooter {
+    position: relative;
+    z-index: 999;
+}
+.logoImageFooter > .fl-module-content {
+    position: relative;
+    z-index: 999;
+    max-width: 160px;
+    margin: -280px auto 0;
+}
+.imageSlideOptionFtr > .fl-module-content > .fl-slideshow-container .fl-slideshow-image > img {
+    width: 80%!important;
+    object-fit: cover;
+    object-position: center!important;
+    margin: 0 auto;
+}
+.teamMemberStyleSlide .fl-post-slider-content:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -500%;
+    width: 1000%;
+    height: 100%;
+    background-color: #000;
+    z-index: -1;
+}
+.teamMemberStyleSlide .fl-post-slider-content {
+    position: relative;
+    z-index: 99;
+    align-self: flex-end;
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+.teamMemberStyleSlide .fl-photo-content {
+    z-index: 999;
+    margin-bottom: 80px;
+}
+.teamMemberStyleSlide .team-member.type-team-member {
+    display: flex;
+    flex-wrap: wrap;
+}
+.teamMemberStyleSlide .team-member.type-team-member .fl-photo-content img {
+    max-width: 100%;
+    vertical-align: top;
+    max-height: 550px;
+    object-fit: cover;
+    object-position: top;
+}
+.single-team-member nav.navigation.post-navigation {
+    display: none;
+}
+body.home .headerStyleSection .fl-module-content .uabb-creative-menu .menu > li > a span.menu-item-text, body.home .headerStyleSection .fl-module-content .uabb-creative-menu .menu > li > .uabb-has-submenu-container > a span.menu-item-text {
+    color: rgba(255,255,255,0.75)
+}
+body.home .headerStyleSection .fl-module-content .uabb-creative-menu .menu > li > a:hover span.menu-item-text, body.home .headerStyleSection .fl-module-content .uabb-creative-menu .menu > li > a:focus span.menu-item-text, body.home .headerStyleSection .fl-module-content .uabb-creative-menu .menu > li:hover > .uabb-has-submenu-container > a span.menu-item-text, body.home .headerStyleSection .fl-module-content .uabb-creative-menu .menu > li:focus > .uabb-has-submenu-container > a span.menu-item-text, body.home .headerStyleSection .fl-module-content .uabb-creative-menu .menu > li.current-menu-item > a span.menu-item-text, body.home .headerStyleSection .fl-module-content .uabb-creative-menu .menu > li.current-menu-item > .uabb-has-submenu-container > a span.menu-item-text, body.home .headerStyleSection .fl-module-content .uabb-creative-menu .menu > li.focus > .uabb-has-submenu-container > a span.menu-item-text, body.home .headerStyleSection .fl-module-content .uabb-creative-menu .menu > li.focus > a span.menu-item-text, body.home .headerStyleSection .fl-module-content .uabb-creative-menu .menu > li.current-menu-ancestor > .uabb-has-submenu-container > a span.menu-item-text, body.home .headerStyleSection .fl-module-content .uabb-creative-menu .menu > li.current-menu-ancestor > .uabb-has-submenu-container > a span.menu-item-text > i {
+    color: rgba(255,255,255,1)
+}
+.active2 {
+    color: #fff !important;
+}
+.active_inner2 {
+    color: #000000 !important;
+}
+.tabStyleSideBar > .fl-module-content > .fl-tabs .fl-tabs-labels {
+    width: calc(45% - 20px);
+}
+.tabStyleSideBar > .fl-module-content > .fl-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.tabStyleSideBar > .fl-module-content > .fl-tabs .fl-tabs-panels {
+    width: calc(55% - 20px);
+    border: 0;
+}
+.tabStyleSideBar > .fl-module-content > .fl-tabs .fl-tabs-labels .fl-tabs-label {
+    padding: 0;
+    color: #656565;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    display: block;
+    width: 100%;
+    border: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+    padding-left: 25px;
+    position: relative;
+}
+.tabStyleSideBar > .fl-module-content > .fl-tabs .fl-tabs-labels .fl-tabs-label.fl-tab-active {
+    color: #000;
+    opacity: 1;
+}
+.tabStyleSideBar > .fl-module-content > .fl-tabs .fl-tabs-panels .fl-tabs-panel-content {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    color: #151515;
+    padding: 0;
+    line-height: 1.6;
+}
+.tabStyleSideBar > .fl-module-content > .fl-tabs .fl-tabs-panels .fl-tabs-panel-label:not(.fl-tab-active) + .fl-tabs-panel-content.fl-tab-active {
+    display: none !important;
+}
+.tabStyleSideBar > .fl-module-content > .fl-tabs .fl-tabs-labels .fl-tabs-label:before {
+    position: absolute;
+    content: '';
+    width: 20px;
+    height: 15px;
+    left: 0;
+    top: 5px;
+    background-image: url('../../uploads/2025/06/arrowNarrowRight.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 16px auto;
+    display: none;
+}
+.tabStyleSideBar > .fl-module-content > .fl-tabs .fl-tabs-labels .fl-tabs-label.fl-tab-active:before {
+    display: block;
+}
+.post-box.postMainCustomAdd > div {
+    width: 100%;
+}
+.post-box.postMainCustomAdd {
+    flex-wrap: wrap;
+}
+.customPostImageStyle .uabb-blog-post-section img {
+    width: 100%;
+    height: 440px;
+    object-fit: cover;
+}
+.customPostImageStyle .uabb-blog-post-section {
+    position: relative;
+    z-index: 1;
+}
+.viewContentLink {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: 0!important;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s;
+    z-index: 99;
+}
+.viewContentLink > a {
+    padding: 0;
+    border: 0;
+    color: #fff!important;
+    font-family: "Cormorant SC", serif;
+    font-weight: bold;
+    font-size: 30px;
+}
+.customPostImageStyle > div > a {
+    position: relative;
+    z-index: 9;
+    display: flex;
+}
+.postMainCustomAdd:hover .customPostImageStyle > div > a:before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    content: '';
+    z-index: 0;
+}
+.postMainCustomAdd:hover .viewContentLink {
+    opacity: 1;
+    visibility: visible;
+}
+.team-card {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 9;
+    padding: 0 40px 40px 40px;
+    background-color: #000;
+}
+.team-slide {
+    padding-top: 12%;
+}
+.featuredImageTeam {
+    width: 40%;
+    padding-left: 3%;
+    margin-top: -12%;
+}
+.contentWrapper {
+    width: 60%;
+    padding: 2% 2% 4% 8%;
+    align-self: flex-end;
+}
+/* .team-card:before {
+    position: absolute;
+    content: '';
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 75%;
+    background-color: #000;
+    z-index: -1;
+    bottom: 0;
+} */
+.team-card .contentWrapper h5, .team-card .contentWrapper h3, .team-card .contentWrapper p, .team-card .contentWrapper a {
+    color: #fff;
+}
+.team-card .contentWrapper h5 {
+    font-family: 'Prata';
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+.team-card .contentWrapper h3 {
+    font-size: 62px;
+    font-family: "Cormorant SC", serif;
+    line-height: 1;
+    font-weight: 600;
+}
+.team-card .contentWrapper p {
+    font-family: 'Prata';
+    font-size: 15px;
+    line-height: 1.75;
+    text-align: justify;
+}
+.readMoreLink {
+    font-family: 'Prata';
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 14px;
+    text-decoration: underline!important;
+}
+.imagePortContent .fl-rich-text {
+    position: relative;
+}
+.imagePortContent .fl-rich-text p {
+    margin: 0;
+}
+.imagePortContent .fl-rich-text h3 > a {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    right: 0;
+    bottom: 0;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    padding: 50px;
+    text-align: center;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    color: #fff!important;
+}
+.contentStylePara .fl-rich-text h3 {
+    font-size: 42px;
+    line-height: 1.2;
+}
+.imagePortContent .fl-rich-text img {
+    filter: brightness(0.7);
+    transition: 0.38s ease-in-out 0s all;
+}
+.imagePortContent .fl-rich-text:hover img {
+    filter: brightness(0.4);
+}
+#custom-preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+    background-color: #000;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.4s ease;
+}
+.loader-inner img {
+    width: 220px;
+    height: auto;
+    filter: brightness(1.2); /* to glow on black */
+    animation: pulse 1.4s infinite ease-in-out;
+}
+ @keyframes pulse {
+ 0% {
+transform: scale(1);
+opacity: 1;
+}
+ 50% {
+transform: scale(1.08);
+opacity: 0.8;
+}
+ 100% {
+transform: scale(1);
+opacity: 1;
+}
+}
+@media screen and (max-width:992px) {
+.headerStyleSection > .fl-row-content-wrap > .fl-row-content {
+    display: flex;
+}
+body.home .headerStyleSection .hamburger svg.hamburger-menu {
+    color: #fff;
+}
+.headerStyleSection ul#menu-menu_en {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    right: 0;
+    background-color: #000;
+    padding: 10px;
+    top: 70px;
+    z-index: 9999;
+}
+.footerColumnNav h2 {
+    max-width: 100%;
+}
+.mainFooterRowCstm {
+    max-width: 100%;
+}
+.navgationLinkFtr {
+    text-align: left;
+    order: 1;
+}
+.socialLinkFtr {
+    order: 2;
+}
+.navgationLinkFtr > a {
+    text-align: left;
+}
+.newsLetterFtr .fl-rich-text h2 {
+    text-align: center;
+    margin-top: 30px;
+}
+.newsLetterFtr .fl-rich-text p {
+    text-align: center;
+}
+.teamMemberStyleSlide .fl-post-slider-img {
+    width: 100%;
+}
+.teamMemberStyleSlide .fl-post-slider-thumb .fl-post-slider-content {
+    width: 100%;
+}
+.teamMemberStyleSlide .team-member.type-team-member .fl-photo-content img {
+    max-height: 100%;
+}
+.teamMemberStyleSlide .fl-photo-content {
+    margin-bottom: 0px;
+}
+.featuredImageTeam {
+    width: 100%;
+    padding-left: 0;
+    margin-top: -12%;
+}
+.featuredImageTeam img {
+    margin: 0 auto;
+    display: block;
+}
+.contentWrapper {
+    width: 100%;
+    padding: 15px
+}
+.featuredImageTeam img {
+    max-height: 480px;
+    width: auto;
+    margin: 0 auto 30px;
+}
+.footerColumnNav h2 {
+    font-size: 52px
+}
+.newsLetterFtr .fl-rich-text h2 {
+    font-size: 50px;
+}
+.contentStylePara .fl-rich-text h3 {
+    font-size: 36px;
+}
+}
+@media screen and (max-width:768px) {
+.loader-inner img {
+    width: 120px;
+}
+.colLastTab {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    align-self: flex-end;
+    padding-top: 10px;
+}
+.colFirstTab {
+    width: 100%;
+}
+.tabsBottomStyleMain .pp-tabs-label .pp-tab-label-flex {
+    justify-content: flex-start;
+}
+.tabsBottomStyleMain .pp-tabs .pp-tabs-label.pp-tab-active, .tabsBottomStyleMain .pp-tabs .pp-tabs-label.pp-tab-active:hover, .tabsBottomStyleMain .pp-tabs .pp-tabs-label:hover, .tabsBottomStyleMain .pp-tabs .pp-tabs-label:focus {
+    background-color: rgb(0 0 0);
+    color: #ffffff;
+}
+.tabsBottomStyleMain .pp-tabs .pp-tabs-label.pp-tab-active .pp-toggle-icon {
+    color: #ffffff;
+    opacity: 1;
+}
+.logoImageFooter > .fl-module-content {
+    margin-top: -42%;
+    max-width: 220px;
+}
+.tabStyleSideBar > .fl-module-content > .fl-tabs .fl-tabs-panels {
+    width: 100%;
+}
+.tabStyleSideBar > .fl-module-content > .fl-tabs .fl-tabs-panels .fl-tabs-panel-content {
+    padding: 10px 15px;
+    width: 100%;
+}
+.team-card {
+    padding: 0 20px 20px 20px;
+}
+.team-card .contentWrapper h3 {
+    font-size: 48px;
+}
+.footerColumnNav h2 {
+    font-size: 42px
+}
+.newsLetterFtr .fl-rich-text h2 {
+    font-size: 40px;
+}
+.contentStylePara .fl-rich-text h3 {
+    font-size: 32px;
+}
+.colLastTab h3 {
+    font-size: 36px;
+}
+.bannerTitleVideo span.fl-heading-text > span:first-child {
+    position: relative;
+    text-indent: 0;
+}
+.bannerTitleVideo span.fl-heading-text > span:first-child:before {
+    display: none;
+}
+.bannerTitleVideo span.fl-heading-text {
+    text-align: center;
+}
+.bannerTitleVideo span.fl-heading-text > span:last-child {
+    text-indent: 0;
+}
+}
+ @media screen and (max-width: 480px) {
+.logoImageFooter > .fl-module-content {
+    margin-top: -50%;
+    max-width: 220px;
+}
+.imagePortContent .fl-rich-text h3 > a {
+    padding: 5px;
+}
+}
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.6s ease;
+}
+.logo-container {
+    position: relative;
+    width: 220px;
+    height: 220px;
+}
+.main-logo {
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease-out;
+}
+.circle-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: rotate(-90deg);
+}
+.circle-progress circle {
+    stroke-dasharray: 666; /* 2πr */
+    stroke-dashoffset: 666;
+    transition: stroke-dashoffset 0.3s linear;
+}
+

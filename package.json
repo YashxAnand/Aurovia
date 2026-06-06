@@ -1,0 +1,11 @@
+{
+  "name": "aurovia-static",
+  "version": "1.0.0",
+  "description": "Aurovia static HTML site optimizations",
+  "scripts": {
+    "build:css": "cleancss -o css/style.min.css css/style.css"
+  },
+  "devDependencies": {
+    "clean-css-cli": "^5.6.3"
+  }
+}
