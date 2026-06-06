@@ -24,21 +24,24 @@ document.addEventListener("DOMContentLoaded", () => {
         }, { once: true });
     }
 
-    // ─── Auto-open after intro animation completes ────────────────────────────
-    function handleIntroComplete() {
-        if (!localStorage.getItem('chatbotPopped')) {
-            localStorage.setItem('chatbotPopped', 'true');
+    // ─── Auto-open after intro animation or delay ────────────────────────────
+    function popChatbotIfFirstTime() {
+        if (!sessionStorage.getItem('chatbotPopped')) {
+            sessionStorage.setItem('chatbotPopped', 'true');
             setTimeout(openChat, 800);
         }
     }
 
-    if (sessionStorage.getItem('introSeen')) {
-        if (!localStorage.getItem('chatbotPopped')) {
-            localStorage.setItem('chatbotPopped', 'true');
-            setTimeout(openChat, 1500);
-        }
+    const overlay = document.getElementById('intro-overlay');
+    
+    if (overlay && !sessionStorage.getItem('introSeen')) {
+        // First visit on home page: wait for intro animation
+        window.addEventListener('introComplete', popChatbotIfFirstTime, { once: true });
+        // Fallback just in case transitionend fails
+        setTimeout(popChatbotIfFirstTime, 6000);
     } else {
-        window.addEventListener('introComplete', handleIntroComplete, { once: true });
+        // Not the home page, or intro already seen
+        setTimeout(popChatbotIfFirstTime, 1500);
     }
 
     // ─── Toggle on button click ──────────────────────────────────────────────
