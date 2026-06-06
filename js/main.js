@@ -42,14 +42,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 2. Mobile Menu Toggle
     const mobileBtn = document.querySelector('.mobile-menu-btn');
-    const navLinks = document.querySelectorAll('.nav-links');
+    const navContainer = document.querySelector('.nav-container');
 
-    if (mobileBtn) {
+    if (mobileBtn && navContainer) {
+        // Create unified mobile menu
+        const mobileMenu = document.createElement('ul');
+        mobileMenu.className = 'nav-links unified-mobile-menu';
+        
+        const leftLinks = document.querySelectorAll('#nav-left li');
+        const rightLinks = document.querySelectorAll('#nav-right li');
+        
+        leftLinks.forEach(li => mobileMenu.appendChild(li.cloneNode(true)));
+        rightLinks.forEach(li => mobileMenu.appendChild(li.cloneNode(true)));
+        
+        navContainer.appendChild(mobileMenu);
+
         mobileBtn.addEventListener('click', () => {
-            navLinks.forEach(nav => nav.classList.toggle('active'));
-            // Animate hamburger icon (optional enhancement)
+            mobileMenu.classList.toggle('active');
+            
+            // Animate hamburger icon
             const spans = mobileBtn.querySelectorAll('span');
-            if (navLinks[0].classList.contains('active')) {
+            if (mobileMenu.classList.contains('active')) {
                 spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
                 spans[1].style.opacity = '0';
                 spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
