@@ -893,3 +893,9 @@ body.intro-active {
 @keyframes intro-progress-fill {
   to { width: 100%; }
 }
+
+@media (min-width: 769px) {
+  .unified-mobile-menu {
+    display: none !important;
+  }
+}
