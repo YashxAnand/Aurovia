@@ -26,11 +26,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // ─── Auto-open after intro animation completes ────────────────────────────
     function handleIntroComplete() {
-        setTimeout(openChat, 800);
+        if (!localStorage.getItem('chatbotPopped')) {
+            localStorage.setItem('chatbotPopped', 'true');
+            setTimeout(openChat, 800);
+        }
     }
 
     if (sessionStorage.getItem('introSeen')) {
-        setTimeout(openChat, 1500);
+        if (!localStorage.getItem('chatbotPopped')) {
+            localStorage.setItem('chatbotPopped', 'true');
+            setTimeout(openChat, 1500);
+        }
     } else {
         window.addEventListener('introComplete', handleIntroComplete, { once: true });
     }

@@ -1044,7 +1044,7 @@ https://github.com/WordPress/gutenberg/issues/17718
 }
 .fl-node-2uxrweqad0hf > .fl-row-content-wrap {
 	background-color: #fefef6;
-	background-image: url(../../2023/08/Raveen_Sommy-0004-1.jpg);
+	background-image: url(../../2023/08/signature-style-bg.jpg);
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-attachment: fixed;
@@ -12618,7 +12618,7 @@ ___________________________________________________________________________*/
 	position: relative;
 	width: 100%;
 	height: 300px; /* adjust as needed */
-	overflow: hidden; /* ensures images don’t overflow */
+	overflow: hidden; /* ensures images don't overflow */
 }
 .slider img {
 	position: absolute;
@@ -12922,7 +12922,7 @@ ___________________________________________________________________________*/
 }
 /* Arrow styling */
 .faq-question::after {
-	content: "▶"; /* right-pointing arrow */
+	content: "â–¶"; /* right-pointing arrow */
 	position: absolute;
 	right: 20px;
 	font-size: 20px;
@@ -12930,7 +12930,7 @@ ___________________________________________________________________________*/
 	color: #2c3e50;
 }
 .faq-item.active .faq-question::after {
-	content: "▼"; /* down-pointing arrow */
+	content: "â–¼"; /* down-pointing arrow */
 }
 .faq-answer {
 	max-height: 0;
@@ -13333,6 +13333,7 @@ border-radius: 10px;}*/
 .client-logo:hover {filter: grayscale(0%);}
 
 /*===========================Glimpses===end========================*/
+
 
 
 
