@@ -150,10 +150,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const RESPONSES = {
         greeting: "👋 Hello! How can I help make your big day unforgettable? Ask me about our services, pricing, or how to reach us!",
         contact:  "📞 You can reach us at **+91 9838358799**, email us at **info@auroviaproductions.com**, or DM us on Instagram [@auroviaweddings](https://instagram.com/auroviaweddings). We'd love to hear from you!",
-        pricing:  "💰 Our packages are fully customised to your needs. Prices vary by event type, duration, and deliverables. Please [get in touch](get-in-touch.html) or call us for a personalised quote!",
-        services: "🎬 We specialise in **Weddings**, **Pre-Weddings**, **Engagements**, **Parties & Birthdays**, and **Corporate Events** — covering both photography and cinematic videography. [See all services →](services.html)",
+        pricing:  "💰 Our packages are fully customised to your needs. Prices vary by event type, duration, and deliverables. Please [get in touch](/get-in-touch) or call us for a personalised quote!",
+        services: "🎬 We specialise in **Weddings**, **Pre-Weddings**, **Engagements**, **Parties & Birthdays**, and **Corporate Events** — covering both photography and cinematic videography. [See all services →](/services)",
         about:    "📸 Aurovia is a passionate wedding photography studio with **9+ years** of experience and **1000+ smiles** captured. Our style is Clean, Consistent & Creative — blending candid moments with artful direction.",
-        booking:  "📅 To check availability or book a date, please [fill out our contact form](get-in-touch.html) or call **+91 9838358799**. We recommend enquiring early as dates fill up fast!",
+        booking:  "📅 To check availability or book a date, please [fill out our contact form](/get-in-touch) or call **+91 9838358799**. We recommend enquiring early as dates fill up fast!",
         unknown:  "🤔 I didn't quite catch that! I can help with:\n• **Services** we offer\n• **Pricing** & packages\n• **Booking** a session\n• **Contact** details\n• **About** Aurovia\n\nTry asking one of those!"
     };
 

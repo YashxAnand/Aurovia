@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services - Aurovia</title>
+    <title>Get In Touch - Aurovia</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,7 +11,69 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <link rel="stylesheet" href="css/style.min.css">
-    <link rel="preload" as="video" href="https://media.auroviaweddings.com/services-hero-bg.mp4" type="video/mp4">
+    <style>
+        .contact-form {
+            background: var(--bg-light);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background: #f9f9f9;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: all var(--transition-fast);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(201, 160, 80, 0.2);
+            background: white;
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .contact-info {
+            padding: 3rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 20px;
+            height: 100%;
+        }
+
+        .contact-info h3 {
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-detail i {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            width: 30px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
@@ -19,19 +81,19 @@
     <header id="header">
         <div class="container nav-container">
             <ul class="nav-links" id="nav-left">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about-us.html">About Us</a></li>
-                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about-us">About Us</a></li>
+                <li><a href="/portfolio">Portfolio</a></li>
             </ul>
             
-            <a href="index.html" class="logo">
+            <a href="/" class="logo">
                 <img loading="lazy" src="assets/front/assets/images/aurovia-main-logo.svg" alt="Aurovia Logo" id="logo-img">
             </a>
             
             <ul class="nav-links" id="nav-right">
-                <li><a href="services.html" class="active">Services</a></li>
-                <li><a href="blogs.html">Blog</a></li>
-                <li><a href="get-in-touch.html">Get In Touch</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/blogs">Blog</a></li>
+                <li><a href="/get-in-touch" class="active">Get In Touch</a></li>
             </ul>
 
             <button class="mobile-menu-btn" id="mobile-toggle">
@@ -43,42 +105,56 @@
     </header>
 
     <main>
-        <section class="hero" style="height: 60vh;">
-            <div class="hero-video-wrapper">
-                <video autoplay muted loop playsinline id="hero-video">
-                    <source src="https://media.auroviaweddings.com/services-hero-bg.mp4" type="video/mp4">
-                    Your browser does not support HTML5 video.
-                </video>
-            </div>
-            
-            <div class="hero-content reveal">
-                <h1 class="hero-title" style="font-size: 3.5rem;">Our Services</h1>
-                <p class="hero-subtitle">From 'Will You?' To 'I Do' — We've Got You Covered.</p>
-            </div>
-        </section>
+        <div class="section bg-light-alt" style="padding-top: 10rem;">
+            <div class="container">
+                <div class="text-center reveal mb-5">
+                    <h1 class="section-title">Get In Touch</h1>
+                    <p class="section-subtitle">Let's craft your story together.</p>
+                </div>
 
-        <section class="section">
-            <div class="container text-center">
-                <div class="grid-4">
-                    <div class="service-card reveal">
-                        <img src="assets/uploads/services/service-weddings.jpg" onerror="this.src='https://auroviaproductions.com/uploads/services/service-weddings.jpg'" alt="Weddings" loading="lazy">
-                        <h4>Weddings</h4>
+                <div class="two-col mt-5">
+                    <!-- Contact Form -->
+                    <div class="contact-form reveal-left">
+                        <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Message sent successfully!');">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Email Address" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" class="form-control" placeholder="Phone Number" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" placeholder="Tell us about your big day..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100" style="width: 100%;">Send Message</button>
+                        </form>
                     </div>
-                    <div class="service-card reveal" style="transition-delay: 0.1s">
-                        <img src="assets/uploads/services/service-pre-wedding.jpg" onerror="this.src='https://auroviaproductions.com/uploads/services/service-pre-wedding.jpg'" alt="Pre-Weddings" loading="lazy">
-                        <h4>Pre-Weddings</h4>
-                    </div>
-                    <div class="service-card reveal" style="transition-delay: 0.2s">
-                        <img src="assets/uploads/services/service-engagements.jpg" onerror="this.src='https://auroviaproductions.com/uploads/services/service-engagements.jpg'" alt="Engagements" loading="lazy">
-                        <h4>Engagements</h4>
-                    </div>
-                    <div class="service-card reveal" style="transition-delay: 0.3s">
-                        <img src="assets/uploads/services/service-parties-birthdays.jpg" onerror="this.src='https://auroviaproductions.com/uploads/services/service-parties-birthdays.jpg'" alt="Parties & Birthdays" loading="lazy">
-                        <h4>Parties & Birthdays</h4>
+
+                    <!-- Contact Info -->
+                    <div class="contact-info reveal-right">
+                        <h3>Contact Information</h3>
+                        <p style="margin-bottom: 2rem;">We'd love to hear from you. Drop us a line and we'll get back to you as soon as possible.</p>
+                        
+                        <div class="contact-detail">
+                            <i class="fa-solid fa-phone"></i>
+                            <a href="tel:+919838358799">+91 9838358799</a>
+                        </div>
+                        <div class="contact-detail">
+                            <i class="fa-regular fa-envelope"></i>
+                            <a href="mailto:info@auroviaproductions.com">info@auroviaproductions.com</a>
+                        </div>
+                        
+                        <div class="social-links mt-4" style="margin-top: 3rem;">
+                            <a href="https://www.instagram.com/auroviaweddings" target="_blank" style="background: rgba(255,255,255,0.2);"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="https://api.whatsapp.com/send?phone=919838358799" target="_blank" style="background: rgba(255,255,255,0.2);"><i class="fa-brands fa-whatsapp"></i></a>
+                            <a href="#" style="background: rgba(255,255,255,0.2);"><i class="fa-brands fa-youtube"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     </main>
 
             <!-- Footer -->
@@ -93,12 +169,12 @@
                         <a href="mailto:info@auroviaproductions.com" style="color: #000;"><i class="fa-regular fa-envelope" style="font-size: 1.2rem;"></i></a>
                     </div>
                     <div style="display: flex; flex-direction: column; gap: 10px; font-weight: 500;">
-                        <a href="index.html" style="color: #333; text-decoration: none;">Home</a>
-                        <a href="about-us.html" style="color: #333; text-decoration: none;">About Us</a>
-                        <a href="portfolio.html" style="color: #333; text-decoration: none;">Portfolio</a>
-                        <a href="services.html" style="color: #333; text-decoration: none;">Services</a>
-                        <a href="blogs.html" style="color: #333; text-decoration: none;">Blog</a>
-                        <a href="get-in-touch.html" style="color: #333; text-decoration: none;">Get In Touch</a>
+                        <a href="/" style="color: #333; text-decoration: none;">Home</a>
+                        <a href="/about-us" style="color: #333; text-decoration: none;">About Us</a>
+                        <a href="/portfolio" style="color: #333; text-decoration: none;">Portfolio</a>
+                        <a href="/services" style="color: #333; text-decoration: none;">Services</a>
+                        <a href="/blogs" style="color: #333; text-decoration: none;">Blog</a>
+                        <a href="/get-in-touch" style="color: #333; text-decoration: none;">Get In Touch</a>
                     </div>
                 </div>
                 

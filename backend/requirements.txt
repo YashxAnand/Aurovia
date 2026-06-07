@@ -6,3 +6,6 @@ python-jose[cryptography]
 python-dotenv
 pydantic
 pydantic-settings
+python-multipart
+boto3
+jinja2

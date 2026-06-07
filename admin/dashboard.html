@@ -7,188 +7,520 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../css/style.min.css">
-    
-    <script>
-        // CRITICAL SECURITY: Run this script BEFORE parsing the body
-        // If no token exists, immediately redirect to login page.
-        const token = localStorage.getItem('admin_token');
-        if (!token) {
-            window.location.replace("login.html");
-        }
-    </script>
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     
     <style>
-        body {
-            background-color: var(--bg-light);
-            font-family: 'Outfit', sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        .admin-header {
-            background: white;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .admin-header img {
-            height: 40px;
-        }
-        .logout-btn {
-            background: #fff;
-            border: 1px solid #ddd;
-            padding: 0.5rem 1.5rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: 0.3s;
-        }
-        .logout-btn:hover {
-            background: #f8f9fa;
-        }
-        .admin-container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 2rem;
-        }
-        .welcome-section {
-            margin-bottom: 2rem;
-        }
-        .welcome-section h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            color: var(--text-dark);
-            margin-bottom: 0.5rem;
-        }
+        body { background-color: var(--bg-light); font-family: 'Outfit', sans-serif; margin: 0; padding: 0; }
+        .admin-header { background: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 20px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+        .admin-header img { height: 40px; }
+        .logout-btn { background: #fff; border: 1px solid #ddd; padding: 0.5rem 1.5rem; border-radius: 8px; cursor: pointer; font-weight: 500; transition: 0.3s; }
+        .logout-btn:hover { background: #f8f9fa; }
+        .admin-container { max-width: 1200px; margin: 2rem auto; padding: 0 2rem; }
         
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-        }
-        .stat-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-            border-left: 4px solid var(--gold-primary);
-        }
-        .stat-card h3 {
-            color: #666;
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
-        }
-        .stat-card .value {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--text-dark);
-        }
+        .tabs { display: flex; gap: 1rem; margin-bottom: 2rem; border-bottom: 2px solid #eee; padding-bottom: 1rem; }
+        .tab-btn { background: none; border: none; padding: 0.5rem 1rem; font-size: 1.1rem; font-weight: 600; color: #666; cursor: pointer; }
+        .tab-btn.active { color: var(--primary); border-bottom: 3px solid var(--primary); }
+        .tab-content { display: none; background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
+        .tab-content.active { display: block; }
+
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
+        .form-control { width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 8px; }
+        .btn-primary { background: var(--primary); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; cursor: pointer; font-weight: 600; }
+        .btn-danger { background: #dc3545; color: white; border: none; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; }
         
-        #loading {
-            text-align: center;
-            padding: 4rem;
-            font-size: 1.2rem;
-            color: #666;
-        }
-        
-        .dashboard-content {
-            display: none;
-        }
+        .media-preview { max-width: 300px; max-height: 200px; margin-top: 10px; border-radius: 8px; border: 1px solid #ddd; }
+        .blog-card, .portfolio-card { border: 1px solid #eee; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; }
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+        .portfolio-card img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; }
+
+        .editor-container { background: #fff; }
     </style>
 </head>
 <body>
 
     <header class="admin-header">
-        <img src="../assets/front/assets/images/aurovia-main-logo.svg" alt="Aurovia Logo" onerror="this.src='https://auroviaproductions.com/front/assets/images/aurovia-main-logo.svg'">
-        <button class="logout-btn" onclick="logout()">
-            <i class="fa-solid fa-right-from-bracket"></i> Logout
-        </button>
+        <img src="../assets/front/assets/images/aurovia-main-logo.svg" alt="Aurovia Logo">
+        <div>
+            <span id="welcome-msg" style="margin-right: 1rem; font-weight: 600;"></span>
+            <button class="logout-btn" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+        </div>
     </header>
 
     <div class="admin-container">
-        <div id="loading">
-            <i class="fa-solid fa-circle-notch fa-spin"></i> Authenticating...
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('pages')">Pages CMS</button>
+            <button class="tab-btn" onclick="switchTab('blogs')">Blogs</button>
+            <button class="tab-btn" onclick="switchTab('portfolio')">Portfolio</button>
         </div>
 
-        <div id="dashboard-content" class="dashboard-content">
-            <div class="welcome-section">
-                <h1 id="welcome-msg">Welcome back!</h1>
-                <p>Here is an overview of your Aurovia website activity.</p>
+        <!-- PAGES CMS -->
+        <div id="pages" class="tab-content active">
+            <h2>Manage Pages</h2>
+            <div class="form-group">
+                <label>Select Page to Edit</label>
+                <select id="page-selector" class="form-control" onchange="loadPageData()">
+                    <option value="">-- Select Page --</option>
+                    <option value="home">Home</option>
+                    <option value="about-us">About Us</option>
+                    <option value="services">Services</option>
+                    <option value="get-in-touch">Contact</option>
+                </select>
             </div>
+            <div id="page-editor" style="display: none;">
+                <h3>Components</h3>
+                <div id="components-list"></div>
+                <button class="btn-primary" onclick="savePage()" style="margin-top: 1rem;">Save Page Changes</button>
+                <button class="btn-primary" onclick="previewPage()" style="margin-top: 1rem; background: #666; margin-left: 10px;">Preview Page</button>
+            </div>
+        </div>
 
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <h3>Total Visitors</h3>
-                    <div class="value" id="val-visitors">--</div>
-                </div>
-                <div class="stat-card">
-                    <h3>New Inquiries</h3>
-                    <div class="value" id="val-inquiries">--</div>
-                </div>
-            </div>
+        <!-- BLOGS CMS -->
+        <div id="blogs" class="tab-content">
+            <h2>Manage Blogs</h2>
+            <button class="btn-primary" onclick="showBlogForm()">+ Create New Blog</button>
             
-            <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.03);">
-                <h3>Manage Website Content</h3>
-                <p style="color: #666; margin-top: 1rem;">Select a module to manage your dynamic data.</p>
-                <!-- Add admin features here in the future -->
+            <div id="blog-form-container" style="display: none; margin-top: 2rem; border-top: 1px solid #eee; padding-top: 2rem;">
+                <h3>Blog Editor</h3>
+                <p>A blog requires up to 3 photos and 3-4 text blocks for a good layout.</p>
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="blog-title" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Slug (URL e.g., my-first-blog)</label>
+                    <input type="text" id="blog-slug" class="form-control">
+                </div>
+                
+                <div id="blog-blocks">
+                    <!-- Dynamic blocks go here -->
+                </div>
+                <button class="btn-primary" onclick="addBlogBlock('text')" style="background: #666;">+ Add Text</button>
+                <button class="btn-primary" onclick="addBlogBlock('image')" style="background: #666;">+ Add Image</button>
+                <button class="btn-primary" onclick="addBlogBlock('video')" style="background: #666;">+ Add Video</button>
+                <br><br>
+                <button class="btn-primary" onclick="saveBlog()">Save Blog</button>
+                <button class="btn-danger" onclick="hideBlogForm()">Cancel</button>
             </div>
+
+            <div id="blog-list" style="margin-top: 2rem;"></div>
         </div>
+
+        <!-- PORTFOLIO CMS -->
+        <div id="portfolio" class="tab-content">
+            <h2>Manage Portfolio</h2>
+            <p>Upload up to 100 items. Ensure images are high quality (JPEG/PNG). Videos must be under 300MB.</p>
+            
+            <div class="form-group" style="background: #f9f9f9; padding: 1rem; border-radius: 8px;">
+                <h3>Add New Item</h3>
+                <label>Title</label>
+                <input type="text" id="port-title" class="form-control" style="margin-bottom: 1rem;">
+                <label>File (Image or Video)</label>
+                <input type="file" id="port-file" class="form-control" accept="image/*,video/*" style="margin-bottom: 1rem;">
+                <button class="btn-primary" onclick="uploadPortfolio()">Upload to Portfolio</button>
+                <div id="port-upload-status" style="margin-top: 0.5rem; color: var(--gold-primary);"></div>
+            </div>
+
+            <h3>Current Portfolio (<span id="port-count">0</span>/100)</h3>
+            <div id="portfolio-grid" class="portfolio-grid"></div>
+        </div>
+
     </div>
 
+    <!-- Quill Editor JS -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <script>
-        const API_BASE_URL = "http://127.0.0.1:8000"; // Change in production
+        const API_BASE_URL = "";
+        let currentQuillEditors = {};
+        
+        async function fetchSecure(url, options={}) {
+            const res = await fetch(API_BASE_URL + url, options);
+            if (res.status === 401) window.location.replace("/admin/login");
+            return res;
+        }
 
-        async function fetchSecureData() {
-            try {
-                const response = await fetch(`${API_BASE_URL}/api/admin/stats`, {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json'
-                    }
-                });
-
-                if (response.status === 401) {
-                    // Token expired or invalid
-                    logout();
-                    return;
-                }
-
-                if (response.ok) {
-                    const data = await response.json();
-                    
-                    // Populate UI
-                    document.getElementById('welcome-msg').textContent = data.message;
-                    document.getElementById('val-visitors').textContent = data.visitors;
-                    document.getElementById('val-inquiries').textContent = data.inquiries;
-                    
-                    // Show dashboard
-                    document.getElementById('loading').style.display = 'none';
-                    document.getElementById('dashboard-content').style.display = 'block';
-                }
-            } catch (err) {
-                console.error("Backend unreachable", err);
-                document.getElementById('loading').innerHTML = `
-                    <div style="color: #d9534f;">
-                        <i class="fa-solid fa-triangle-exclamation"></i> 
-                        Unable to connect to the backend server.
-                    </div>
-                `;
+        async function init() {
+            const res = await fetchSecure('/api/admin/stats');
+            if(res.ok) {
+                const data = await res.json();
+                document.getElementById('welcome-msg').textContent = data.message;
             }
         }
 
-        function logout() {
-            localStorage.removeItem('admin_token');
-            window.location.replace("login.html");
+        async function logout() {
+            await fetch('/api/logout', { method: 'POST' });
+            window.location.replace("/admin/login");
         }
 
-        // Initialize dashboard data
-        fetchSecureData();
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+
+            if (tabId === 'portfolio') loadPortfolio();
+            if (tabId === 'blogs') loadBlogs();
+        }
+
+        // ==========================================
+        // PAGES CMS
+        // ==========================================
+        let currentPageData = {};
+        
+        async function loadPageData() {
+            const pageName = document.getElementById('page-selector').value;
+            const editorDiv = document.getElementById('page-editor');
+            const compList = document.getElementById('components-list');
+            
+            if (!pageName) {
+                editorDiv.style.display = 'none';
+                return;
+            }
+
+            editorDiv.style.display = 'block';
+            compList.innerHTML = 'Loading...';
+            currentQuillEditors = {};
+
+            const res = await fetchSecure(`/api/admin/pages/${pageName}`);
+            if (res.ok) {
+                currentPageData = await res.json();
+                renderPageEditor();
+            }
+        }
+
+        function renderPageEditor() {
+            const compList = document.getElementById('components-list');
+            compList.innerHTML = '';
+            
+            // Example static schema if components are empty
+            if (!currentPageData.components || Object.keys(currentPageData.components).length === 0) {
+                currentPageData.components = {
+                    "hero_title": { type: "text", content: "" },
+                    "hero_image": { type: "image", url: "" }
+                };
+            }
+
+            Object.entries(currentPageData.components).forEach(([key, comp]) => {
+                const div = document.createElement('div');
+                div.className = 'form-group';
+                div.style.background = '#f9f9f9';
+                div.style.padding = '1rem';
+                div.style.borderRadius = '8px';
+
+                let specHtml = '';
+                if (comp.type === 'image') {
+                    if (key.includes('hero_image')) specHtml = ' <small style="color:#666; font-weight:normal;">(Recommended: 1920x1080px)</small>';
+                    else if (key.includes('service_image')) specHtml = ' <small style="color:#666; font-weight:normal;">(Recommended: 600x800px vertical)</small>';
+                    else if (key.includes('about_image')) specHtml = ' <small style="color:#666; font-weight:normal;">(Recommended: 800x1000px vertical)</small>';
+                    else if (key.includes('signature_bg')) specHtml = ' <small style="color:#666; font-weight:normal;">(Recommended: 1920x1080px landscape)</small>';
+                    else specHtml = ' <small style="color:#666; font-weight:normal;">(Recommended: 800x600px)</small>';
+                }
+                div.innerHTML = `<label>${key.replace(/_/g, ' ').toUpperCase()}${specHtml}</label>`;
+
+                if (comp.type === 'text') {
+                    const editorContainer = document.createElement('div');
+                    editorContainer.className = 'editor-container';
+                    editorContainer.id = `editor-${key}`;
+                    editorContainer.style.height = '150px';
+                    div.appendChild(editorContainer);
+                    compList.appendChild(div);
+
+                    const quill = new Quill(`#editor-${key}`, { theme: 'snow' });
+                    quill.clipboard.dangerouslyPasteHTML(comp.content || '');
+                    currentQuillEditors[key] = quill;
+                } else if (comp.type === 'image' || comp.type === 'video') {
+                    div.innerHTML += `
+                        <input type="file" id="file-${key}" class="form-control" accept="${comp.type}/*">
+                        <button class="btn-primary" style="margin-top: 10px;" onclick="uploadComponentMedia('${key}', '${comp.type}')">Upload & Replace</button>
+                        <div id="status-${key}"></div>
+                    `;
+                    if (comp.url) {
+                        const previewUrl = comp.url.startsWith('http') || comp.url.startsWith('/') ? comp.url : '/' + comp.url;
+                        if(comp.type === 'image') div.innerHTML += `<img src="${previewUrl}" class="media-preview">`;
+                        else div.innerHTML += `<video src="${previewUrl}" class="media-preview" controls></video>`;
+                    }
+                    compList.appendChild(div);
+                }
+            });
+        }
+
+        async function uploadComponentMedia(key, type) {
+            const fileInput = document.getElementById(`file-${key}`);
+            if (!fileInput.files[0]) return alert('Select a file first');
+            
+            document.getElementById(`status-${key}`).innerText = 'Uploading...';
+            
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+
+            const res = await fetchSecure('/api/admin/upload', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (res.ok) {
+                const data = await res.json();
+                currentPageData.components[key] = { type: type, url: data.url, s3_key: data.s3_key };
+                document.getElementById(`status-${key}`).innerText = 'Uploaded! Remember to click Save Page Changes.';
+                renderPageEditor(); // Refresh preview
+            } else {
+                const err = await res.json();
+                alert('Upload failed: ' + err.detail);
+            }
+        }
+
+        async function savePage() {
+            const pageName = document.getElementById('page-selector').value;
+            
+            // Sync text editors to data
+            Object.keys(currentQuillEditors).forEach(key => {
+                currentPageData.components[key].content = currentQuillEditors[key].root.innerHTML;
+            });
+
+            const res = await fetchSecure(`/api/admin/pages/${pageName}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ components: currentPageData.components })
+            });
+
+            if (res.ok) alert('Page saved successfully!');
+            else alert('Failed to save page');
+        }
+
+        // ==========================================
+        // PORTFOLIO CMS
+        // ==========================================
+        async function loadPortfolio() {
+            const res = await fetchSecure('/api/admin/portfolio');
+            if (res.ok) {
+                const items = await res.json();
+                document.getElementById('port-count').innerText = items.length;
+                const grid = document.getElementById('portfolio-grid');
+                grid.innerHTML = '';
+                
+                items.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'portfolio-card';
+                    let media = item.type === 'image' 
+                        ? `<img src="${item.url}" alt="${item.title}">` 
+                        : `<video src="${item.url}" style="width:100%; height:150px; object-fit:cover;"></video>`;
+                    
+                    div.innerHTML = `
+                        ${media}
+                        <h4 style="margin: 0.5rem 0;">${item.title}</h4>
+                        <button class="btn-danger" onclick="deletePortfolio('${item._id}')"><i class="fa fa-trash"></i></button>
+                    `;
+                    grid.appendChild(div);
+                });
+            }
+        }
+
+        async function uploadPortfolio() {
+            const fileInput = document.getElementById('port-file');
+            const titleInput = document.getElementById('port-title');
+            if (!fileInput.files[0] || !titleInput.value) return alert('Select file and enter title');
+            
+            const file = fileInput.files[0];
+            const type = file.type.startsWith('video/') ? 'video' : 'image';
+            const size_mb = file.size / (1024 * 1024);
+            
+            if (type === 'video' && size_mb > 300) return alert('Video exceeds 300MB limit!');
+
+            document.getElementById('port-upload-status').innerText = 'Uploading file to Cloudflare S3... Please wait.';
+            
+            const formData = new FormData();
+            formData.append('file', file);
+
+            const uploadRes = await fetchSecure('/api/admin/upload', { method: 'POST', body: formData });
+            if (!uploadRes.ok) return alert('Upload failed');
+            
+            const uploadData = await uploadRes.json();
+            
+            const item = { type: type, url: uploadData.url, s3_key: uploadData.s3_key, title: titleInput.value, size_mb: size_mb };
+            
+            const saveRes = await fetchSecure('/api/admin/portfolio', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(item)
+            });
+
+            if (saveRes.ok) {
+                document.getElementById('port-upload-status').innerText = 'Success!';
+                fileInput.value = '';
+                titleInput.value = '';
+                loadPortfolio();
+            }
+        }
+
+        async function deletePortfolio(id) {
+            if(!confirm('Are you sure you want to delete this item?')) return;
+            const res = await fetchSecure(`/api/admin/portfolio/${id}`, { method: 'DELETE' });
+            if (res.ok) loadPortfolio();
+        }
+
+        // ==========================================
+        // BLOGS CMS
+        // ==========================================
+        let currentBlogBlocks = [];
+        
+        function showBlogForm() {
+            document.getElementById('blog-form-container').style.display = 'block';
+            document.getElementById('blog-title').value = '';
+            document.getElementById('blog-slug').value = '';
+            currentBlogBlocks = [];
+            renderBlogBlocks();
+        }
+
+        function hideBlogForm() {
+            document.getElementById('blog-form-container').style.display = 'none';
+        }
+
+        function addBlogBlock(type) {
+            currentBlogBlocks.push({ type: type, content: '', url: '', s3_key: '' });
+            renderBlogBlocks();
+        }
+
+        function removeBlogBlock(index) {
+            currentBlogBlocks.splice(index, 1);
+            renderBlogBlocks();
+        }
+
+        function previewPage() {
+            const pageName = document.getElementById('page-selector').value;
+            if(!pageName) return;
+            const url = pageName === 'home' ? '/' : `/${pageName}`;
+            window.open(url, '_blank');
+        }
+
+        function renderBlogBlocks() {
+            const container = document.getElementById('blog-blocks');
+            container.innerHTML = '';
+            currentBlogBlocks.forEach((block, idx) => {
+                const div = document.createElement('div');
+                div.className = 'form-group';
+                div.style.border = '1px solid #ccc';
+                div.style.padding = '1rem';
+                div.style.marginBottom = '1rem';
+                div.innerHTML = `<h4>Block ${idx+1}: ${block.type.toUpperCase()} <button style="float:right" class="btn-danger" onclick="removeBlogBlock(${idx})">X</button></h4>`;
+                
+                if (block.type === 'text') {
+                    div.innerHTML += `<textarea id="blog-text-${idx}" class="form-control" rows="4" placeholder="Enter text or HTML here...">${block.content}</textarea>`;
+                    if (block.content) {
+                        div.innerHTML += `<div class="media-preview" style="margin-top:10px; padding:10px; background:#f9f9f9; border:1px solid #ddd; max-width:100%; max-height:none;">${block.content}</div>`;
+                    }
+                } else if (block.type === 'image') {
+                    div.innerHTML += `
+                        <input type="file" id="blog-img-${idx}" class="form-control" accept="image/*">
+                        <button class="btn-primary" style="margin-top:10px" onclick="uploadBlogImage(${idx})">Upload Image</button>
+                        <div id="blog-img-status-${idx}"></div>
+                    `;
+                    if (block.url) div.innerHTML += `<img src="${block.url}" class="media-preview" style="max-width:300px; display:block; margin-top:10px;">`;
+                } else if (block.type === 'video') {
+                    div.innerHTML += `
+                        <input type="file" id="blog-video-${idx}" class="form-control" accept="video/*">
+                        <button class="btn-primary" style="margin-top:10px" onclick="uploadBlogVideo(${idx})">Upload Video</button>
+                        <div id="blog-video-status-${idx}"></div>
+                    `;
+                    if (block.url) div.innerHTML += `<video src="${block.url}" class="media-preview" controls style="max-width:300px; display:block; margin-top:10px;"></video>`;
+                }
+                container.appendChild(div);
+            });
+        }
+
+        async function uploadBlogVideo(idx) {
+            const fileInput = document.getElementById(`blog-video-${idx}`);
+            if (!fileInput.files[0]) return alert('Select video');
+            document.getElementById(`blog-video-status-${idx}`).innerText = 'Uploading...';
+            
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+            const res = await fetchSecure('/api/admin/upload', { method: 'POST', body: formData });
+            
+            if (res.ok) {
+                const data = await res.json();
+                currentBlogBlocks[idx].url = data.url;
+                currentBlogBlocks[idx].s3_key = data.s3_key;
+                renderBlogBlocks();
+            } else {
+                alert('Upload failed');
+            }
+        }
+
+        async function uploadBlogImage(idx) {
+            const fileInput = document.getElementById(`blog-img-${idx}`);
+            if (!fileInput.files[0]) return alert('Select image');
+            document.getElementById(`blog-img-status-${idx}`).innerText = 'Uploading...';
+            
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+            const res = await fetchSecure('/api/admin/upload', { method: 'POST', body: formData });
+            
+            if (res.ok) {
+                const data = await res.json();
+                currentBlogBlocks[idx].url = data.url;
+                currentBlogBlocks[idx].s3_key = data.s3_key;
+                renderBlogBlocks();
+            } else {
+                alert('Upload failed');
+            }
+        }
+
+        async function saveBlog() {
+            const title = document.getElementById('blog-title').value;
+            const slug = document.getElementById('blog-slug').value;
+            if(!title || !slug) return alert('Title and Slug required');
+            
+            // Sync texts
+            currentBlogBlocks.forEach((block, idx) => {
+                if(block.type === 'text') block.content = document.getElementById(`blog-text-${idx}`).value;
+            });
+
+            const blog = {
+                title: title,
+                slug: slug,
+                content_blocks: currentBlogBlocks
+            };
+
+            const res = await fetchSecure('/api/admin/blogs', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(blog)
+            });
+
+            if (res.ok) {
+                alert('Blog created!');
+                hideBlogForm();
+                loadBlogs();
+            } else alert('Failed to create blog');
+        }
+
+        async function loadBlogs() {
+            const res = await fetchSecure('/api/admin/blogs');
+            if (res.ok) {
+                const blogs = await res.json();
+                const container = document.getElementById('blog-list');
+                container.innerHTML = '';
+                blogs.forEach(b => {
+                    const div = document.createElement('div');
+                    div.className = 'blog-card';
+                    div.innerHTML = `
+                        <h3>${b.title}</h3>
+                        <p>Slug: ${b.slug} | Blocks: ${b.content_blocks ? b.content_blocks.length : 0}</p>
+                        <button class="btn-danger" onclick="deleteBlog('${b.slug}')">Delete</button>
+                        <a href="/blog/${b.slug}" target="_blank" class="btn-primary" style="text-decoration:none; display:inline-block; margin-left:10px;">View Blog</a>
+                    `;
+                    container.appendChild(div);
+                });
+            }
+        }
+
+        async function deleteBlog(slug) {
+            if(!confirm('Delete blog?')) return;
+            const res = await fetchSecure(`/api/admin/blogs/${slug}`, { method: 'DELETE' });
+            if (res.ok) loadBlogs();
+        }
+
+        init();
     </script>
 </body>
 </html>

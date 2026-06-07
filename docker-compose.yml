@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  aurovia-app:
+    build: .
+    container_name: aurovia-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      # These will be passed from the host or an .env file on the server
+      - MONGODB_URL=${MONGODB_URL}
+      - JWT_SECRET=${JWT_SECRET}
+      - ADMIN_USERNAME=${ADMIN_USERNAME}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+    volumes:
+      # Optional: Persist local uploads if you're not using external storage
+      - ./assets/uploads:/app/assets/uploads
+
+  # Optional: If Cloudflare Tunnel is used locally on the server instead of global setup
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared
+    restart: unless-stopped
+    command: tunnel run
+    environment:
+      - TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}

@@ -49,21 +49,21 @@
         <div class="container nav-container">
             <!-- Left Menu -->
             <ul class="nav-links" id="nav-left">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="about-us.html">About Us</a></li>
-                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="/" class="active">Home</a></li>
+                <li><a href="/about-us">About Us</a></li>
+                <li><a href="/portfolio">Portfolio</a></li>
             </ul>
             
             <!-- Logo -->
-            <a href="index.html" class="logo">
+            <a href="/" class="logo">
                 <img loading="lazy" src="assets/front/assets/images/aurovia-main-logo.svg" alt="Aurovia Logo" id="logo-img">
             </a>
             
             <!-- Right Menu -->
             <ul class="nav-links" id="nav-right">
-                <li><a href="services.html">Services</a></li>
-                <li><a href="blogs.html">Blog</a></li>
-                <li><a href="get-in-touch.html">Get In Touch</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/blogs">Blog</a></li>
+                <li><a href="/get-in-touch">Get In Touch</a></li>
             </ul>
 
             <!-- Mobile Toggle -->
@@ -86,7 +86,7 @@
             </div>
             
             <div class="hero-content reveal" style="background: transparent; border: none; box-shadow: none; position: absolute; bottom: 15%; left: 50%; transform: translateX(-50%); width: auto; padding: 0;">
-                <a href="portfolio.html" class="btn btn-outline" style="border-color: white; color: white; padding: 1rem 3rem; font-size: 1.2rem; border-radius: 50px; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); display: flex; align-items: center; gap: 10px; transition: all 0.3s ease;">
+                <a href="/portfolio" class="btn btn-outline" style="border-color: white; color: white; padding: 1rem 3rem; font-size: 1.2rem; border-radius: 50px; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); display: flex; align-items: center; gap: 10px; transition: all 0.3s ease;">
                     Explore Portfolio <i class="fa-solid fa-arrow-right"></i>
                 </a>
             </div>
@@ -113,15 +113,14 @@
         <section class="section">
             <div class="container two-col">
                 <div class="reveal-left">
-                    <img src="assets/front/assets/images/about-section-showcase.jpg" alt="Aurovia Wedding Photography" loading="lazy">
+                    <img src="{{ components.get('about_image', {}).get('url', 'assets/front/assets/images/about-section-showcase.jpg') }}" alt="Aurovia Wedding Photography" loading="lazy">
                 </div>
                 <div class="reveal-right">
                     <h2 class="section-title">About Us</h2>
-                    <h3 class="section-subtitle">“9+ Years, 1000+ Smiles — And Counting!”</h3>
-                    <p>From candid chuckles to tear-jerking vows, our passionate team at Aurovia has mastered the art of wedding magic through lens and heart.</p>
-                    <p>At Aurovia, wedding photography isn't just a business—it is our joyful obsession! For over nine years, our camera-wielding superheroes have leapt across banquet halls and scenic gardens, capturing everything from wild baraat dance-offs to whispered rooftop vows.</p>
+                    <h3 class="section-subtitle">{{ components.get('home_subtitle', {}).get('content', '“9+ Years, 1000+ Smiles — And Counting!”') | safe }}</h3>
+                    <div>{{ components.get('home_about_content', {}).get('content', '<p>From candid chuckles to tear-jerking vows, our passionate team at Aurovia has mastered the art of wedding magic through lens and heart.</p><p>At Aurovia, wedding photography isn\'t just a business—it is our joyful obsession! For over nine years, our camera-wielding superheroes have leapt across banquet halls and scenic gardens, capturing everything from wild baraat dance-offs to whispered rooftop vows.</p>') | safe }}</div>
                     <br>
-                    <a href="about-us.html" class="btn btn-outline">Read More</a>
+                    <a href="/about-us" class="btn btn-outline">Read More</a>
                 </div>
             </div>
         </section>
@@ -135,20 +134,20 @@
                 </div>
 
                 <div class="grid-4 mt-5">
-                    <a href="services.html" class="service-card reveal" style="transition-delay: 0.1s">
-                        <img src="assets/uploads/services/service-weddings.jpg" alt="Weddings" loading="lazy">
+                    <a href="/services" class="service-card reveal" style="transition-delay: 0.1s">
+                        <img src="{{ components.get('service_image_1', {}).get('url', 'assets/uploads/services/service-weddings.jpg') }}" alt="Weddings" loading="lazy">
                         <h4>Weddings</h4>
                     </a>
-                    <a href="services.html" class="service-card reveal" style="transition-delay: 0.2s">
-                        <img src="assets/uploads/services/service-pre-wedding.jpg" alt="Pre-Weddings" loading="lazy">
+                    <a href="/services" class="service-card reveal" style="transition-delay: 0.2s">
+                        <img src="{{ components.get('service_image_2', {}).get('url', 'assets/uploads/services/service-pre-wedding.jpg') }}" alt="Pre-Weddings" loading="lazy">
                         <h4>Pre-Weddings</h4>
                     </a>
-                    <a href="services.html" class="service-card reveal" style="transition-delay: 0.3s">
-                        <img src="assets/uploads/services/service-engagements.jpg" alt="Engagements" loading="lazy">
+                    <a href="/services" class="service-card reveal" style="transition-delay: 0.3s">
+                        <img src="{{ components.get('service_image_3', {}).get('url', 'assets/uploads/services/service-engagements.jpg') }}" alt="Engagements" loading="lazy">
                         <h4>Engagements</h4>
                     </a>
-                    <a href="services.html" class="service-card reveal" style="transition-delay: 0.4s">
-                        <img src="assets/uploads/services/service-parties-birthdays.jpg" alt="Parties & Birthdays" loading="lazy">
+                    <a href="/services" class="service-card reveal" style="transition-delay: 0.4s">
+                        <img src="{{ components.get('service_image_4', {}).get('url', 'assets/uploads/services/service-parties-birthdays.jpg') }}" alt="Parties & Birthdays" loading="lazy">
                         <h4>Parties & Birthdays</h4>
                     </a>
                 </div>
@@ -156,13 +155,13 @@
         </section>
 
         <!-- Signature Style Section -->
-        <section class="section" style="background: url('assets/front/assets/images/signature-style-bg.jpg') center/cover fixed;">
+        <section class="section" style="background: url('{{ components.get('signature_bg', {}).get('url', 'assets/front/assets/images/signature-style-bg.jpg') }}') center/cover fixed;">
             <div class="container text-center" style="background: rgba(0,0,0,0.6); padding: 4rem; border-radius: 20px; color: white;">
                 <div class="reveal">
                     <h2 class="section-title text-primary">Our signature style</h2>
                     <p style="font-size: 1.5rem; letter-spacing: 2px; text-transform: uppercase;">Clean | Consistent | Creative</p>
                     <br>
-                    <a href="get-in-touch.html" class="btn btn-primary">Get in touch</a>
+                    <a href="/get-in-touch" class="btn btn-primary">Get in touch</a>
                 </div>
             </div>
         </section>
@@ -180,12 +179,12 @@
                         <a href="mailto:info@auroviaproductions.com" style="color: #000;"><i class="fa-regular fa-envelope" style="font-size: 1.2rem;"></i></a>
                     </div>
                     <div style="display: flex; flex-direction: column; gap: 10px; font-weight: 500;">
-                        <a href="index.html" style="color: #333; text-decoration: none;">Home</a>
-                        <a href="about-us.html" style="color: #333; text-decoration: none;">About Us</a>
-                        <a href="portfolio.html" style="color: #333; text-decoration: none;">Portfolio</a>
-                        <a href="services.html" style="color: #333; text-decoration: none;">Services</a>
-                        <a href="blogs.html" style="color: #333; text-decoration: none;">Blog</a>
-                        <a href="get-in-touch.html" style="color: #333; text-decoration: none;">Get In Touch</a>
+                        <a href="/" style="color: #333; text-decoration: none;">Home</a>
+                        <a href="/about-us" style="color: #333; text-decoration: none;">About Us</a>
+                        <a href="/portfolio" style="color: #333; text-decoration: none;">Portfolio</a>
+                        <a href="/services" style="color: #333; text-decoration: none;">Services</a>
+                        <a href="/blogs" style="color: #333; text-decoration: none;">Blog</a>
+                        <a href="/get-in-touch" style="color: #333; text-decoration: none;">Get In Touch</a>
                     </div>
                 </div>
                 

@@ -1,4 +1,30 @@
-*.mp4
+# Node
+node_modules/
+package-lock.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+backend/venv/
+venv/
+env/
+
+# Environment variables
+.env
+backend/.env
+
+# Agents / IDE
+.agents/
+.gemini/
+
+# Cloudflare Wrangler
 .wrangler/
 worker/.wrangler/
-node_modules/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Media
+*.mp4

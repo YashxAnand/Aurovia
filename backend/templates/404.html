@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurovia - Page Not Found</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: var(--bg-light);
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            text-align: center;
+        }
+        .error-container {
+            background: white;
+            padding: 4rem 3rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+            max-width: 500px;
+            width: 100%;
+        }
+        .error-container img {
+            height: 60px;
+            margin-bottom: 2rem;
+        }
+        .error-container h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: var(--gold-primary);
+            margin: 0 0 1rem 0;
+        }
+        .error-container h2 {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+        .error-container p {
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        .btn-home {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--gold-primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .btn-home:hover {
+            background: var(--gold-dark);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <img src="/assets/front/assets/images/aurovia-main-logo.svg" alt="Aurovia Logo" onerror="this.src='https://auroviaproductions.com/front/assets/images/aurovia-main-logo.svg'">
+        <h1>404</h1>
+        <h2>Oops! Page Not Found</h2>
+        <p>The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
+        <a href="/" class="btn-home"><i class="fa-solid fa-arrow-left"></i> Go Back Home</a>
+    </div>
+</body>
+</html>

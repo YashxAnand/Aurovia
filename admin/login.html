@@ -47,19 +47,19 @@
             font-family: inherit;
         }
         .btn {
-            width: 100%;
-            padding: 1rem;
-            background: var(--gold-primary);
-            color: white;
+            background-color: var(--primary);
+            color: #fff;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
             border: none;
-            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
             font-size: 1rem;
             font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
+            margin-top: 1rem;
         }
         .btn:hover {
-            background: var(--gold-dark);
+            background-color: var(--primary-dark);
         }
         .error-message {
             color: #d9534f;
@@ -86,17 +86,15 @@
                 <label for="password">Password</label>
                 <input type="password" id="password" required>
             </div>
-            <button type="submit" class="btn">Login Securely</button>
+            <button type="submit" class="btn" id="login-btn">Submit / Login</button>
+            <div style="margin-top: 1.5rem;">
+                <a href="/" style="color: #666; text-decoration: none; font-size: 0.9rem;"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+            </div>
         </form>
     </div>
 
     <script>
-        // Redirect to dashboard if already logged in
-        if (localStorage.getItem('admin_token')) {
-            window.location.href = 'dashboard.html';
-        }
-
-        const API_BASE_URL = "http://127.0.0.1:8000"; // Change in production
+        const API_BASE_URL = ""; // Relative paths since frontend and backend are unified
 
         document.getElementById('login-form').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -105,12 +103,13 @@
             const password = document.getElementById('password').value;
             const errorMsg = document.getElementById('error-msg');
             
-            // FastAPI OAuth2 requires form data
             const formData = new URLSearchParams();
             formData.append('username', username);
             formData.append('password', password);
 
             try {
+                // By default, fetch sends cookies if credentials: 'same-origin' is set.
+                // Since it's the same domain, it works automatically.
                 const response = await fetch(`${API_BASE_URL}/api/login`, {
                     method: 'POST',
                     headers: {
@@ -120,9 +119,8 @@
                 });
 
                 if (response.ok) {
-                    const data = await response.json();
-                    localStorage.setItem('admin_token', data.access_token);
-                    window.location.href = 'dashboard.html';
+                    // Cookie is set automatically by the server response
+                    window.location.href = '/admin/dashboard';
                 } else {
                     errorMsg.style.display = 'block';
                 }
