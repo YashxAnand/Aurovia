@@ -28,7 +28,9 @@ class BlogPost(BaseModel):
     slug: str
     created_at: datetime = Field(default_factory=datetime.utcnow)
     thumbnail: Optional[UIComponent] = None
-    content_blocks: List[BlogContentBlock] = []
+    carousel_images: List[UIComponent] = []
+    media_slots: List[UIComponent] = []
+    text_blocks: List[str] = []
 
 class PortfolioItem(BaseModel):
     type: str # 'image' or 'video'

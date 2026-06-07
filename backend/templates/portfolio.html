@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -213,8 +213,8 @@
                 </div>
                 
                 <div class="footer-col" style="position: relative; width: 100%; max-width: 300px; height: 300px; margin: 0 auto;">
-                    <img loading="lazy" src="assets/front/assets/images/footer-logo-secondary.jpg" onerror="this.src='https://auroviaproductions.com/front/assets/images/footer-logo-secondary.jpg'" alt="Logo 2" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain;">
-                    <img loading="lazy" src="assets/front/assets/images/footer-logo-primary.jpg" onerror="this.src='https://auroviaproductions.com/front/assets/images/footer-logo-primary.jpg'" alt="Logo 1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; animation: footer-fade 8s infinite ease-in-out;">
+                    <img loading="lazy" src="https://media.auroviaweddings.com/footer-logo-secondary.jpg" onerror="this.src='https://auroviaproductions.com/front/https://media.auroviaweddings.com/footer-logo-secondary.jpg'" alt="Logo 2" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain;">
+                    <img loading="lazy" src="https://media.auroviaweddings.com/footer-logo-primary.jpg" onerror="this.src='https://auroviaproductions.com/front/https://media.auroviaweddings.com/footer-logo-primary.jpg'" alt="Logo 1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; animation: footer-fade 8s infinite ease-in-out;">
                 </div>
                 
                 <div class="footer-col" style="text-align: left;">
@@ -237,20 +237,11 @@
     <!-- Custom JS -->
     <script src="js/main.js"></script>
     <script>
-        // Images array based on old portfolio HTML
+        // Images array dynamically loaded from database
         const images = [
-            "assets/uploads/portfolio/gallery/big/portfolio-gallery-14.jpeg",
-            "assets/uploads/portfolio/gallery/big/portfolio-gallery-3.jpeg",
-            "assets/uploads/portfolio/gallery/big/portfolio-gallery-2.jpeg",
-            "assets/uploads/portfolio/gallery/big/portfolio-gallery-6.jpeg",
-            "assets/uploads/portfolio/gallery/big/portfolio-gallery-4.jpeg",
-            "assets/uploads/portfolio/gallery/big/portfolio-gallery-21.jpg",
-            "assets/uploads/services/service-weddings.jpg",
-            "assets/uploads/portfolio/gallery/big/portfolio-gallery-9.jpg",
-            "assets/uploads/portfolio/gallery/big/portfolio-gallery-15.jpg",
-            "assets/uploads/portfolio/gallery/big/portfolio-gallery-7.jpg",
-            "assets/uploads/portfolio/gallery/big/portfolio-gallery-10.jpg",
-            "assets/uploads/portfolio/gallery/big/portfolio-gallery-18.jpg"
+            {% for item in portfolio_items %}
+            "{{ item.url }}"{% if not loop.last %},{% endif %}
+            {% endfor %}
         ];
 
         const grid = document.getElementById('gallery-grid');

@@ -45,6 +45,26 @@
             color: var(--text-muted);
             margin-bottom: 1rem;
         }
+
+        /* 4 columns on desktop, 2 on mobile */
+        .blogs-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 992px) {
+            .blogs-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 576px) {
+            .blogs-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -84,25 +104,22 @@
                     <p class="section-subtitle">Tiny moments, timeless memories</p>
                 </div>
 
-                <div class="grid-3 mt-5">
-                    <!-- Blog Card 1 -->
-                    <div class="blog-card reveal">
-                        <img src="assets/front/assets/images/blog-1.jpg" onerror="this.src='https://auroviaproductions.com/front/assets/images/blog-1.jpg'" alt="Blog 1" class="blog-img" loading="lazy">
-                        <div class="blog-content">
-                            <div class="blog-meta"><i class="fa-regular fa-calendar"></i> June 6, 2026</div>
-                            <h3 class="blog-title">Top 10 Luxurious Indian Wedding Venues</h3>
-                            <a href="#" class="btn btn-outline" style="padding: 0.5rem 1.5rem;">Read More</a>
-                        </div>
+                <div class="blogs-grid">
                     {% for b in blogs %}
                     <div class="blog-card reveal">
-                        <img src="{% if b.thumbnail and b.thumbnail is mapping %}{{ b.thumbnail.get('url', 'assets/front/assets/images/blog-1.jpg') }}{% elif b.thumbnail and b.thumbnail is string %}{{ b.thumbnail }}{% else %}assets/front/assets/images/blog-1.jpg{% endif %}" alt="{{ b.title }}" class="blog-img" loading="lazy">
+                        <!-- Use the first carousel image as thumbnail if available -->
+                        {% set thumb = b.carousel_images[0].url if b.carousel_images and b.carousel_images|length > 0 else 'https://media.auroviaweddings.com/blog-1.jpg' %}
+                        <img src="{{ thumb }}" alt="{{ b.title }}" class="blog-img" loading="lazy">
                         <div class="blog-content">
-                            <h3>{{ b.title }}</h3>
-                            <a href="/blog/{{ b.slug }}" class="btn-primary mt-2" style="display:inline-block;">Read More</a>
+                            {% if b.created_at %}
+                            <div class="blog-meta"><i class="fa-regular fa-calendar"></i> {{ b.created_at.strftime('%B %d, %Y') }}</div>
+                            {% endif %}
+                            <h3 class="blog-title">{{ b.title }}</h3>
+                            <a href="/blog/{{ b.slug }}" class="btn btn-outline" style="padding: 0.5rem 1.5rem; display:inline-block;">Read More</a>
                         </div>
                     </div>
                     {% else %}
-                    <div class="blog-card reveal">
+                    <div class="blog-card reveal" style="grid-column: 1 / -1; text-align: center;">
                         <p style="padding:2rem;">No blogs available yet.</p>
                     </div>
                     {% endfor %}
@@ -133,8 +150,8 @@
                 </div>
                 
                 <div class="footer-col" style="position: relative; width: 100%; max-width: 300px; height: 300px; margin: 0 auto;">
-                    <img loading="lazy" src="assets/front/assets/images/footer-logo-secondary.jpg" onerror="this.src='https://auroviaproductions.com/front/assets/images/footer-logo-secondary.jpg'" alt="Logo 2" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain;">
-                    <img loading="lazy" src="assets/front/assets/images/footer-logo-primary.jpg" onerror="this.src='https://auroviaproductions.com/front/assets/images/footer-logo-primary.jpg'" alt="Logo 1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; animation: footer-fade 8s infinite ease-in-out;">
+                    <img loading="lazy" src="https://media.auroviaweddings.com/footer-logo-secondary.jpg" onerror="this.src='https://auroviaproductions.com/front/https://media.auroviaweddings.com/footer-logo-secondary.jpg'" alt="Logo 2" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain;">
+                    <img loading="lazy" src="https://media.auroviaweddings.com/footer-logo-primary.jpg" onerror="this.src='https://auroviaproductions.com/front/https://media.auroviaweddings.com/footer-logo-primary.jpg'" alt="Logo 1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; animation: footer-fade 8s infinite ease-in-out;">
                 </div>
                 
                 <div class="footer-col" style="text-align: left;">

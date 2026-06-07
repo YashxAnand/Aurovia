@@ -35,6 +35,58 @@
         .portfolio-card img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; }
 
         .editor-container { background: #fff; }
+        
+        select.form-control {
+            appearance: none;
+            -webkit-appearance: none;
+            background: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>") no-repeat right 8px center;
+            background-color: white;
+            background-size: 16px;
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 1.05rem;
+            color: #333;
+            border-radius: 8px;
+        }
+        select.form-control:hover { border-color: var(--primary); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        select.form-control:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(201, 160, 80, 0.2); }
+
+        /* Quill Font Dropdown Styling */
+        .ql-snow .ql-picker.ql-font .ql-picker-label[data-value="arial"]::before,
+        .ql-snow .ql-picker.ql-font .ql-picker-item[data-value="arial"]::before { content: 'Arial'; font-family: 'Arial', sans-serif; }
+        
+        .ql-snow .ql-picker.ql-font .ql-picker-label[data-value="comic-sans"]::before,
+        .ql-snow .ql-picker.ql-font .ql-picker-item[data-value="comic-sans"]::before { content: 'Comic Sans MS'; font-family: 'Comic Sans MS', cursive, sans-serif; }
+
+        .ql-snow .ql-picker.ql-font .ql-picker-label[data-value="courier-new"]::before,
+        .ql-snow .ql-picker.ql-font .ql-picker-item[data-value="courier-new"]::before { content: 'Courier New'; font-family: 'Courier New', Courier, monospace; }
+
+        .ql-snow .ql-picker.ql-font .ql-picker-label[data-value="georgia"]::before,
+        .ql-snow .ql-picker.ql-font .ql-picker-item[data-value="georgia"]::before { content: 'Georgia'; font-family: Georgia, serif; }
+
+        .ql-snow .ql-picker.ql-font .ql-picker-label[data-value="lucida"]::before,
+        .ql-snow .ql-picker.ql-font .ql-picker-item[data-value="lucida"]::before { content: 'Lucida Sans'; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; }
+
+        .ql-snow .ql-picker.ql-font .ql-picker-label[data-value="tahoma"]::before,
+        .ql-snow .ql-picker.ql-font .ql-picker-item[data-value="tahoma"]::before { content: 'Tahoma'; font-family: Tahoma, Geneva, Verdana, sans-serif; }
+
+        .ql-snow .ql-picker.ql-font .ql-picker-label[data-value="times-new-roman"]::before,
+        .ql-snow .ql-picker.ql-font .ql-picker-item[data-value="times-new-roman"]::before { content: 'Times New Roman'; font-family: 'Times New Roman', Times, serif; }
+
+        .ql-snow .ql-picker.ql-font .ql-picker-label[data-value="trebuchet-ms"]::before,
+        .ql-snow .ql-picker.ql-font .ql-picker-item[data-value="trebuchet-ms"]::before { content: 'Trebuchet MS'; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; }
+
+        .ql-snow .ql-picker.ql-font .ql-picker-label[data-value="verdana"]::before,
+        .ql-snow .ql-picker.ql-font .ql-picker-item[data-value="verdana"]::before { content: 'Verdana'; font-family: Verdana, Geneva, Tahoma, sans-serif; }
+
+        .ql-snow .ql-picker.ql-font .ql-picker-label[data-value="playfair-display"]::before,
+        .ql-snow .ql-picker.ql-font .ql-picker-item[data-value="playfair-display"]::before { content: 'Playfair Display'; font-family: 'Playfair Display', serif; }
+
+        .ql-snow .ql-picker.ql-font .ql-picker-label[data-value="outfit"]::before,
+        .ql-snow .ql-picker.ql-font .ql-picker-item[data-value="outfit"]::before { content: 'Outfit'; font-family: 'Outfit', sans-serif; }
     </style>
 </head>
 <body>
@@ -82,7 +134,7 @@
             
             <div id="blog-form-container" style="display: none; margin-top: 2rem; border-top: 1px solid #eee; padding-top: 2rem;">
                 <h3>Blog Editor</h3>
-                <p>A blog requires up to 3 photos and 3-4 text blocks for a good layout.</p>
+                
                 <div class="form-group">
                     <label>Title</label>
                     <input type="text" id="blog-title" class="form-control">
@@ -91,13 +143,32 @@
                     <label>Slug (URL e.g., my-first-blog)</label>
                     <input type="text" id="blog-slug" class="form-control">
                 </div>
-                
-                <div id="blog-blocks">
-                    <!-- Dynamic blocks go here -->
+
+                <div class="form-group" style="background:#f0f8ff; padding:15px; border-radius:8px;">
+                    <h4>Carousel Images (Exact 4 required)</h4>
+                    <div id="blog-carousel-inputs" style="display:grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div><label>Image 1</label><input type="file" id="carousel-0" accept="image/*" class="form-control"><div id="car-status-0"></div></div>
+                        <div><label>Image 2</label><input type="file" id="carousel-1" accept="image/*" class="form-control"><div id="car-status-1"></div></div>
+                        <div><label>Image 3</label><input type="file" id="carousel-2" accept="image/*" class="form-control"><div id="car-status-2"></div></div>
+                        <div><label>Image 4</label><input type="file" id="carousel-3" accept="image/*" class="form-control"><div id="car-status-3"></div></div>
+                    </div>
                 </div>
-                <button class="btn-primary" onclick="addBlogBlock('text')" style="background: #666;">+ Add Text</button>
-                <button class="btn-primary" onclick="addBlogBlock('image')" style="background: #666;">+ Add Image</button>
-                <button class="btn-primary" onclick="addBlogBlock('video')" style="background: #666;">+ Add Video</button>
+
+                <div class="form-group" style="background:#fff0f5; padding:15px; border-radius:8px;">
+                    <h4>Media Slots (Up to 3 - Upload Image OR Paste YouTube Embed Code)</h4>
+                    <div id="blog-media-slots">
+                        <!-- slots generated via JS -->
+                    </div>
+                </div>
+                
+                <div class="form-group" style="background:#f5fffa; padding:15px; border-radius:8px;">
+                    <h4>Text Blocks</h4>
+                    <div id="blog-text-blocks">
+                        <!-- text blocks generated via JS -->
+                    </div>
+                    <button class="btn-primary" onclick="addBlogTextBlock()" style="background: #444; margin-top:10px;">+ Add Text Block</button>
+                </div>
+
                 <br><br>
                 <button class="btn-primary" onclick="saveBlog()">Save Blog</button>
                 <button class="btn-danger" onclick="hideBlogForm()">Cancel</button>
@@ -115,8 +186,8 @@
                 <h3>Add New Item</h3>
                 <label>Title</label>
                 <input type="text" id="port-title" class="form-control" style="margin-bottom: 1rem;">
-                <label>File (Image or Video)</label>
-                <input type="file" id="port-file" class="form-control" accept="image/*,video/*" style="margin-bottom: 1rem;">
+                <label>File(s) (Image or Video)</label>
+                <input type="file" id="port-file" class="form-control" accept="image/*,video/*" multiple style="margin-bottom: 1rem;">
                 <button class="btn-primary" onclick="uploadPortfolio()">Upload to Portfolio</button>
                 <div id="port-upload-status" style="margin-top: 0.5rem; color: var(--gold-primary);"></div>
             </div>
@@ -301,14 +372,21 @@
                 items.forEach(item => {
                     const div = document.createElement('div');
                     div.className = 'portfolio-card';
+                    let mediaUrl = item.url.startsWith('http') || item.url.startsWith('/') ? item.url : '/' + item.url;
                     let media = item.type === 'image' 
-                        ? `<img src="${item.url}" alt="${item.title}">` 
-                        : `<video src="${item.url}" style="width:100%; height:150px; object-fit:cover;"></video>`;
+                        ? `<img src="${mediaUrl}" alt="${item.title}">` 
+                        : `<video src="${mediaUrl}" style="width:100%; height:150px; object-fit:cover;"></video>`;
                     
                     div.innerHTML = `
                         ${media}
                         <h4 style="margin: 0.5rem 0;">${item.title}</h4>
-                        <button class="btn-danger" onclick="deletePortfolio('${item._id}')"><i class="fa fa-trash"></i></button>
+                        <div style="display:flex; gap: 5px; margin-top: 10px;">
+                            <input type="file" id="replace-file-${item._id}" accept="image/*,video/*" style="display:none;" onchange="replacePortfolioItem('${item._id}', '${item.title.replace(/'/g, "\\'")}')">
+                            <button class="btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;" onclick="document.getElementById('replace-file-${item._id}').click()">Replace</button>
+                            <button class="btn-danger" style="padding: 0.5rem 1rem; font-size: 0.9rem;" onclick="deletePortfolio('${item._id}')"><i class="fa fa-trash"></i></button>
+                        </div>
+                        <small style="color:#666; display:block; margin-top:5px;">(Recommended: 800x600px)</small>
+                        <div id="replace-status-${item._id}" style="color: var(--primary); font-size: 0.85rem; margin-top: 5px;"></div>
                     `;
                     grid.appendChild(div);
                 });
@@ -318,38 +396,45 @@
         async function uploadPortfolio() {
             const fileInput = document.getElementById('port-file');
             const titleInput = document.getElementById('port-title');
-            if (!fileInput.files[0] || !titleInput.value) return alert('Select file and enter title');
+            if (fileInput.files.length === 0 || !titleInput.value) return alert('Select file(s) and enter title');
             
-            const file = fileInput.files[0];
-            const type = file.type.startsWith('video/') ? 'video' : 'image';
-            const size_mb = file.size / (1024 * 1024);
+            document.getElementById('port-upload-status').innerText = 'Uploading files... Please wait.';
             
-            if (type === 'video' && size_mb > 300) return alert('Video exceeds 300MB limit!');
+            for (let i = 0; i < fileInput.files.length; i++) {
+                const file = fileInput.files[i];
+                const type = file.type.startsWith('video/') ? 'video' : 'image';
+                const size_mb = file.size / (1024 * 1024);
+                
+                if (type === 'video' && size_mb > 300) {
+                    alert(`Video ${file.name} exceeds 300MB limit! Skipping.`);
+                    continue;
+                }
 
-            document.getElementById('port-upload-status').innerText = 'Uploading file to Cloudflare S3... Please wait.';
-            
-            const formData = new FormData();
-            formData.append('file', file);
+                const formData = new FormData();
+                formData.append('file', file);
 
-            const uploadRes = await fetchSecure('/api/admin/upload', { method: 'POST', body: formData });
-            if (!uploadRes.ok) return alert('Upload failed');
-            
-            const uploadData = await uploadRes.json();
-            
-            const item = { type: type, url: uploadData.url, s3_key: uploadData.s3_key, title: titleInput.value, size_mb: size_mb };
-            
-            const saveRes = await fetchSecure('/api/admin/portfolio', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(item)
-            });
-
-            if (saveRes.ok) {
-                document.getElementById('port-upload-status').innerText = 'Success!';
-                fileInput.value = '';
-                titleInput.value = '';
-                loadPortfolio();
+                const uploadRes = await fetchSecure('/api/admin/upload', { method: 'POST', body: formData });
+                if (!uploadRes.ok) {
+                    alert(`Upload failed for ${file.name}`);
+                    continue;
+                }
+                
+                const uploadData = await uploadRes.json();
+                
+                const itemTitle = fileInput.files.length > 1 ? `${titleInput.value} - ${i + 1}` : titleInput.value;
+                const item = { type: type, url: uploadData.url, s3_key: uploadData.s3_key, title: itemTitle, size_mb: size_mb };
+                
+                await fetchSecure('/api/admin/portfolio', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(item)
+                });
             }
+
+            document.getElementById('port-upload-status').innerText = 'Success!';
+            fileInput.value = '';
+            titleInput.value = '';
+            loadPortfolio();
         }
 
         async function deletePortfolio(id) {
@@ -358,110 +443,191 @@
             if (res.ok) loadPortfolio();
         }
 
+        async function replacePortfolioItem(id, title) {
+            const fileInput = document.getElementById(`replace-file-${id}`);
+            if (!fileInput.files[0]) return;
+            
+            const file = fileInput.files[0];
+            const type = file.type.startsWith('video/') ? 'video' : 'image';
+            const size_mb = file.size / (1024 * 1024);
+            if (type === 'video' && size_mb > 300) return alert('Video exceeds 300MB limit!');
+            
+            document.getElementById(`replace-status-${id}`).innerText = 'Uploading...';
+            
+            const formData = new FormData();
+            formData.append('file', file);
+            const uploadRes = await fetchSecure('/api/admin/upload', { method: 'POST', body: formData });
+            if (!uploadRes.ok) {
+                document.getElementById(`replace-status-${id}`).innerText = 'Upload failed';
+                return;
+            }
+            const uploadData = await uploadRes.json();
+            
+            const item = { type: type, url: uploadData.url, s3_key: uploadData.s3_key, title: title, size_mb: size_mb };
+            
+            const saveRes = await fetchSecure(`/api/admin/portfolio/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(item)
+            });
+            if (saveRes.ok) loadPortfolio();
+            else document.getElementById(`replace-status-${id}`).innerText = 'Update failed';
+        }
+
         // ==========================================
         // BLOGS CMS
         // ==========================================
-        let currentBlogBlocks = [];
+        let textBlocksCount = 0;
+        let blogQuillEditors = [];
+        let isEditingBlog = false;
+        let originalBlogSlug = '';
+        let existingCarouselImages = [];
+        let existingMediaSlots = [];
         
-        function showBlogForm() {
+        // Register font attributor to use inline styles for fonts
+        const FontStyle = Quill.import('attributors/style/font');
+        FontStyle.whitelist = ['arial', 'comic-sans', 'courier-new', 'georgia', 'lucida', 'tahoma', 'times-new-roman', 'trebuchet-ms', 'verdana', 'playfair-display', 'outfit'];
+        Quill.register(FontStyle, true);
+
+        const quillToolbarOptions = [
+          ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+          ['blockquote', 'code-block'],
+          [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+          [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+          [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+          [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+          [{ 'direction': 'rtl' }],                         // text direction
+          [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+          [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+          [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+          [{ 'font': FontStyle.whitelist }],
+          [{ 'align': [] }],
+          ['link'],
+          ['clean']                                         // remove formatting button
+        ];
+
+        function showBlogForm(isEdit = false) {
             document.getElementById('blog-form-container').style.display = 'block';
-            document.getElementById('blog-title').value = '';
-            document.getElementById('blog-slug').value = '';
-            currentBlogBlocks = [];
-            renderBlogBlocks();
+            if (!isEdit) {
+                document.getElementById('blog-title').value = '';
+                document.getElementById('blog-slug').value = '';
+                isEditingBlog = false;
+                originalBlogSlug = '';
+                existingCarouselImages = [];
+                existingMediaSlots = [];
+                
+                // reset carousels
+                for(let i=0; i<4; i++) {
+                    document.getElementById(`carousel-${i}`).value = '';
+                    document.getElementById(`car-status-${i}`).innerText = '';
+                }
+
+                // render 3 media slots
+                const mediaContainer = document.getElementById('blog-media-slots');
+                mediaContainer.innerHTML = '';
+                for(let i=0; i<3; i++) {
+                    mediaContainer.innerHTML += `
+                        <div style="border:1px solid #ddd; padding:10px; margin-bottom:10px;">
+                            <h5>Slot ${i+1}</h5>
+                            <label>Upload Image:</label>
+                            <input type="file" id="media-img-${i}" accept="image/*" class="form-control" style="margin-bottom:5px;">
+                            <div id="media-status-${i}"></div>
+                            <label>OR Paste YouTube Embed URL (e.g. https://www.youtube.com/embed/xxxxx):</label>
+                            <input type="text" id="media-yt-${i}" class="form-control">
+                        </div>
+                    `;
+                }
+
+                // reset text blocks
+                document.getElementById('blog-text-blocks').innerHTML = '';
+                textBlocksCount = 0;
+                blogQuillEditors = [];
+                addBlogTextBlock(); // add 1 by default
+            }
         }
 
         function hideBlogForm() {
             document.getElementById('blog-form-container').style.display = 'none';
         }
 
-        function addBlogBlock(type) {
-            currentBlogBlocks.push({ type: type, content: '', url: '', s3_key: '' });
-            renderBlogBlocks();
-        }
-
-        function removeBlogBlock(index) {
-            currentBlogBlocks.splice(index, 1);
-            renderBlogBlocks();
-        }
-
-        function previewPage() {
-            const pageName = document.getElementById('page-selector').value;
-            if(!pageName) return;
-            const url = pageName === 'home' ? '/' : `/${pageName}`;
-            window.open(url, '_blank');
-        }
-
-        function renderBlogBlocks() {
-            const container = document.getElementById('blog-blocks');
-            container.innerHTML = '';
-            currentBlogBlocks.forEach((block, idx) => {
-                const div = document.createElement('div');
-                div.className = 'form-group';
-                div.style.border = '1px solid #ccc';
-                div.style.padding = '1rem';
-                div.style.marginBottom = '1rem';
-                div.innerHTML = `<h4>Block ${idx+1}: ${block.type.toUpperCase()} <button style="float:right" class="btn-danger" onclick="removeBlogBlock(${idx})">X</button></h4>`;
-                
-                if (block.type === 'text') {
-                    div.innerHTML += `<textarea id="blog-text-${idx}" class="form-control" rows="4" placeholder="Enter text or HTML here...">${block.content}</textarea>`;
-                    if (block.content) {
-                        div.innerHTML += `<div class="media-preview" style="margin-top:10px; padding:10px; background:#f9f9f9; border:1px solid #ddd; max-width:100%; max-height:none;">${block.content}</div>`;
-                    }
-                } else if (block.type === 'image') {
-                    div.innerHTML += `
-                        <input type="file" id="blog-img-${idx}" class="form-control" accept="image/*">
-                        <button class="btn-primary" style="margin-top:10px" onclick="uploadBlogImage(${idx})">Upload Image</button>
-                        <div id="blog-img-status-${idx}"></div>
-                    `;
-                    if (block.url) div.innerHTML += `<img src="${block.url}" class="media-preview" style="max-width:300px; display:block; margin-top:10px;">`;
-                } else if (block.type === 'video') {
-                    div.innerHTML += `
-                        <input type="file" id="blog-video-${idx}" class="form-control" accept="video/*">
-                        <button class="btn-primary" style="margin-top:10px" onclick="uploadBlogVideo(${idx})">Upload Video</button>
-                        <div id="blog-video-status-${idx}"></div>
-                    `;
-                    if (block.url) div.innerHTML += `<video src="${block.url}" class="media-preview" controls style="max-width:300px; display:block; margin-top:10px;"></video>`;
-                }
-                container.appendChild(div);
+        function addBlogTextBlock(content = '') {
+            const container = document.getElementById('blog-text-blocks');
+            const div = document.createElement('div');
+            const idx = textBlocksCount;
+            div.id = `text-block-wrap-${idx}`;
+            div.style.marginBottom = '20px';
+            div.innerHTML = `
+                <h5>Text Block ${idx + 1} <button class="btn-danger" style="float:right; padding:2px 8px; font-size:12px;" onclick="document.getElementById('text-block-wrap-${idx}').style.display='none'">Remove</button></h5>
+                <div id="blog-quill-${idx}" style="height: 200px; background: white;"></div>
+            `;
+            container.appendChild(div);
+            
+            const quill = new Quill(`#blog-quill-${idx}`, { 
+                theme: 'snow',
+                modules: { toolbar: quillToolbarOptions }
             });
+            if (content) quill.clipboard.dangerouslyPasteHTML(content);
+            blogQuillEditors[idx] = quill;
+            textBlocksCount++;
         }
 
-        async function uploadBlogVideo(idx) {
-            const fileInput = document.getElementById(`blog-video-${idx}`);
-            if (!fileInput.files[0]) return alert('Select video');
-            document.getElementById(`blog-video-status-${idx}`).innerText = 'Uploading...';
-            
-            const formData = new FormData();
-            formData.append('file', fileInput.files[0]);
-            const res = await fetchSecure('/api/admin/upload', { method: 'POST', body: formData });
-            
+        async function editBlog(slug) {
+            const res = await fetchSecure('/api/admin/blogs');
             if (res.ok) {
-                const data = await res.json();
-                currentBlogBlocks[idx].url = data.url;
-                currentBlogBlocks[idx].s3_key = data.s3_key;
-                renderBlogBlocks();
-            } else {
-                alert('Upload failed');
-            }
-        }
+                const blogs = await res.json();
+                const blog = blogs.find(b => b.slug === slug);
+                if (!blog) return alert("Blog not found");
 
-        async function uploadBlogImage(idx) {
-            const fileInput = document.getElementById(`blog-img-${idx}`);
-            if (!fileInput.files[0]) return alert('Select image');
-            document.getElementById(`blog-img-status-${idx}`).innerText = 'Uploading...';
-            
-            const formData = new FormData();
-            formData.append('file', fileInput.files[0]);
-            const res = await fetchSecure('/api/admin/upload', { method: 'POST', body: formData });
-            
-            if (res.ok) {
-                const data = await res.json();
-                currentBlogBlocks[idx].url = data.url;
-                currentBlogBlocks[idx].s3_key = data.s3_key;
-                renderBlogBlocks();
-            } else {
-                alert('Upload failed');
+                isEditingBlog = true;
+                originalBlogSlug = slug;
+                existingCarouselImages = blog.carousel_images || [];
+                existingMediaSlots = blog.media_slots || [];
+
+                document.getElementById('blog-form-container').style.display = 'block';
+                document.getElementById('blog-title').value = blog.title;
+                document.getElementById('blog-slug').value = blog.slug;
+
+                // carousels
+                for(let i=0; i<4; i++) {
+                    document.getElementById(`carousel-${i}`).value = '';
+                    if (existingCarouselImages[i]) {
+                        document.getElementById(`car-status-${i}`).innerHTML = `<span style="color:green">Existing image: <a href="${existingCarouselImages[i].url}" target="_blank">View</a></span>`;
+                    } else {
+                        document.getElementById(`car-status-${i}`).innerText = '';
+                    }
+                }
+
+                // media slots
+                const mediaContainer = document.getElementById('blog-media-slots');
+                mediaContainer.innerHTML = '';
+                for(let i=0; i<3; i++) {
+                    let existingMsg = '';
+                    let existingYt = '';
+                    if (existingMediaSlots[i]) {
+                        if (existingMediaSlots[i].type === 'image') existingMsg = `<span style="color:green">Existing image: <a href="${existingMediaSlots[i].url}" target="_blank">View</a></span>`;
+                        else if (existingMediaSlots[i].type === 'youtube') existingYt = existingMediaSlots[i].url;
+                    }
+                    mediaContainer.innerHTML += `
+                        <div style="border:1px solid #ddd; padding:10px; margin-bottom:10px;">
+                            <h5>Slot ${i+1}</h5>
+                            <label>Upload New Image (overwrites existing):</label>
+                            <input type="file" id="media-img-${i}" accept="image/*" class="form-control" style="margin-bottom:5px;">
+                            <div id="media-status-${i}">${existingMsg}</div>
+                            <label>OR Paste YouTube Embed URL:</label>
+                            <input type="text" id="media-yt-${i}" class="form-control" value="${existingYt}">
+                        </div>
+                    `;
+                }
+
+                // text blocks
+                document.getElementById('blog-text-blocks').innerHTML = '';
+                textBlocksCount = 0;
+                blogQuillEditors = [];
+                if (blog.text_blocks && blog.text_blocks.length > 0) {
+                    blog.text_blocks.forEach(text => addBlogTextBlock(text));
+                } else {
+                    addBlogTextBlock();
+                }
             }
         }
 
@@ -469,29 +635,89 @@
             const title = document.getElementById('blog-title').value;
             const slug = document.getElementById('blog-slug').value;
             if(!title || !slug) return alert('Title and Slug required');
-            
-            // Sync texts
-            currentBlogBlocks.forEach((block, idx) => {
-                if(block.type === 'text') block.content = document.getElementById(`blog-text-${idx}`).value;
-            });
+
+            // 1. Upload Carousel Images
+            let carousel_images = [];
+            for(let i=0; i<4; i++) {
+                const fileInput = document.getElementById(`carousel-${i}`);
+                if(fileInput.files[0]) {
+                    document.getElementById(`car-status-${i}`).innerText = 'Uploading...';
+                    const formData = new FormData();
+                    formData.append('file', fileInput.files[0]);
+                    const res = await fetchSecure('/api/admin/upload', { method: 'POST', body: formData });
+                    if(res.ok) {
+                        const data = await res.json();
+                        carousel_images.push({ type: 'image', url: data.url, s3_key: data.s3_key });
+                        document.getElementById(`car-status-${i}`).innerText = 'Uploaded';
+                    }
+                } else {
+                    // Keep existing if any
+                    if (isEditingBlog && existingCarouselImages[i]) {
+                        carousel_images.push(existingCarouselImages[i]);
+                    }
+                }
+            }
+
+            // 2. Upload/Parse Media Slots
+            let media_slots = [];
+            for(let i=0; i<3; i++) {
+                const fileInput = document.getElementById(`media-img-${i}`);
+                const ytInput = document.getElementById(`media-yt-${i}`).value;
+                
+                if(fileInput.files[0]) {
+                    document.getElementById(`media-status-${i}`).innerText = 'Uploading...';
+                    const formData = new FormData();
+                    formData.append('file', fileInput.files[0]);
+                    const res = await fetchSecure('/api/admin/upload', { method: 'POST', body: formData });
+                    if(res.ok) {
+                        const data = await res.json();
+                        media_slots.push({ type: 'image', url: data.url, s3_key: data.s3_key });
+                        document.getElementById(`media-status-${i}`).innerText = 'Uploaded';
+                    }
+                } else if(ytInput) {
+                    media_slots.push({ type: 'youtube', url: ytInput, s3_key: null });
+                } else {
+                    // Keep existing if any
+                    if (isEditingBlog && existingMediaSlots[i]) {
+                        media_slots.push(existingMediaSlots[i]);
+                    }
+                }
+            }
+
+            // 3. Extract Text Blocks from Quill
+            let text_blocks = [];
+            for(let i=0; i<textBlocksCount; i++) {
+                const wrap = document.getElementById(`text-block-wrap-${i}`);
+                if (wrap && wrap.style.display !== 'none') {
+                    const html = blogQuillEditors[i].root.innerHTML;
+                    if(html.trim() !== '' && html !== '<p><br></p>') {
+                        text_blocks.push(html);
+                    }
+                }
+            }
 
             const blog = {
                 title: title,
                 slug: slug,
-                content_blocks: currentBlogBlocks
+                carousel_images: carousel_images,
+                media_slots: media_slots,
+                text_blocks: text_blocks
             };
 
-            const res = await fetchSecure('/api/admin/blogs', {
-                method: 'POST',
+            const endpoint = isEditingBlog ? `/api/admin/blogs/${originalBlogSlug}` : '/api/admin/blogs';
+            const method = isEditingBlog ? 'PUT' : 'POST';
+
+            const res = await fetchSecure(endpoint, {
+                method: method,
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(blog)
             });
 
             if (res.ok) {
-                alert('Blog created!');
+                alert(isEditingBlog ? 'Blog updated!' : 'Blog created!');
                 hideBlogForm();
                 loadBlogs();
-            } else alert('Failed to create blog');
+            } else alert('Failed to save blog');
         }
 
         async function loadBlogs() {
@@ -505,9 +731,10 @@
                     div.className = 'blog-card';
                     div.innerHTML = `
                         <h3>${b.title}</h3>
-                        <p>Slug: ${b.slug} | Blocks: ${b.content_blocks ? b.content_blocks.length : 0}</p>
+                        <p>Slug: ${b.slug}</p>
+                        <button class="btn-primary" style="margin-right:10px" onclick="editBlog('${b.slug}')">Edit</button>
                         <button class="btn-danger" onclick="deleteBlog('${b.slug}')">Delete</button>
-                        <a href="/blog/${b.slug}" target="_blank" class="btn-primary" style="text-decoration:none; display:inline-block; margin-left:10px;">View Blog</a>
+                        <a href="/blog/${b.slug}" target="_blank" class="btn-primary" style="text-decoration:none; display:inline-block; margin-left:10px;">View</a>
                     `;
                     container.appendChild(div);
                 });

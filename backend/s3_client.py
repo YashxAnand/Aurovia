@@ -16,7 +16,8 @@ def get_s3_client():
         endpoint_url=endpoint,
         aws_access_key_id=access_key,
         aws_secret_access_key=secret_key,
-        region_name="auto"
+        region_name="auto",
+        config=boto3.session.Config(signature_version='s3v4')
     )
 
 def upload_file_to_r2(file_content, filename, content_type):

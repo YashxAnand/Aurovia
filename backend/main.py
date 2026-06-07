@@ -231,8 +231,14 @@ async def create_blog(blog: BlogPost, current_user: User = Depends(get_current_u
 
 @app.put("/api/admin/blogs/{slug}")
 async def update_blog(slug: str, blog: BlogPost, current_user: User = Depends(get_current_user_from_cookie)):
-    # Need to check old media to delete? Assuming client handles it.
-    await blogs_collection.update_one({"slug": slug}, {"$set": blog.dict()})
+    blog_dict = blog.dict()
+    # Check if we are updating the slug
+    if blog.slug != slug:
+        # Check if new slug already exists
+        existing = await blogs_collection.find_one({"slug": blog.slug})
+        if existing:
+            raise HTTPException(status_code=400, detail="New slug already exists")
+    await blogs_collection.update_one({"slug": slug}, {"$set": blog_dict})
     return {"message": "Blog updated successfully"}
 
 @app.delete("/api/admin/blogs/{slug}")
@@ -242,9 +248,12 @@ async def delete_blog(slug: str, current_user: User = Depends(get_current_user_f
     if blog:
         if blog.get("thumbnail") and blog["thumbnail"].get("s3_key"):
             delete_file_from_r2(blog["thumbnail"]["s3_key"])
-        for block in blog.get("content_blocks", []):
-            if block.get("s3_key"):
-                delete_file_from_r2(block["s3_key"])
+        for img in blog.get("carousel_images", []):
+            if img.get("s3_key"):
+                delete_file_from_r2(img["s3_key"])
+        for media in blog.get("media_slots", []):
+            if media.get("s3_key"):
+                delete_file_from_r2(media["s3_key"])
         await blogs_collection.delete_one({"slug": slug})
     return {"message": "Blog deleted successfully"}
 
@@ -263,6 +272,11 @@ async def create_portfolio_item(item: PortfolioItem, current_user: User = Depend
         raise HTTPException(status_code=400, detail="Maximum limit of 100 portfolio items reached")
     await portfolio_collection.insert_one(item.dict())
     return {"message": "Portfolio item added"}
+
+@app.put("/api/admin/portfolio/{item_id}")
+async def update_portfolio_item(item_id: str, item: PortfolioItem, current_user: User = Depends(get_current_user_from_cookie)):
+    await portfolio_collection.update_one({"_id": ObjectId(item_id)}, {"$set": item.dict()})
+    return {"message": "Item updated"}
 
 @app.delete("/api/admin/portfolio/{item_id}")
 async def delete_portfolio_item(item_id: str, current_user: User = Depends(get_current_user_from_cookie)):
